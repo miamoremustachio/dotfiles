@@ -1,0 +1,34 @@
+// Place your key bindings in this file to override the defaults
+[
+  {
+    "key": "ctrl+`",
+    "command": "workbench.action.terminal.newWithCwd",
+    "args": {
+        "cwd": "${fileDirname}"
+    },
+    "when": "terminalCount < 1"
+  },
+  {
+    "key": "ctrl+=",
+    "command": "editor.action.fontZoomIn"
+  },
+  {
+    "key": "ctrl+-",
+    "command": "editor.action.fontZoomOut"
+  },
+  {
+    "key": "alt+.",
+    "command": "editor.action.showContextMenu",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+/",
+    "command": "editor.action.showContextMenu",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "shift+f10",
+    "command": "-editor.action.showContextMenu",
+    "when": "textInputFocus"
+  },
+]

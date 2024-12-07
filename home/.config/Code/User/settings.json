@@ -1,0 +1,40 @@
+{
+    "window.zoomLevel": 1, // Linux-specific
+    "window.restoreFullscreen": true, // Linux-specific
+    "window.newWindowDimensions": "fullscreen", // Linux-specific
+    "window.commandCenter": false,
+    "window.menuBarVisibility": "toggle",
+    "window.titleBarStyle": "custom",
+    "workbench.tree.enableStickyScroll": false,
+    "workbench.activityBar.location": "top",
+    "workbench.layoutControl.enabled": false,
+    "workbench.iconTheme": "a-file-icon-vscode",
+    "workbench.startupEditor": "none",
+    "editor.tabSize": 2,
+    "editor.mouseWheelZoom": true,
+    "editor.lightbulb.enabled": "off",
+    "editor.occurrencesHighlight": "off",
+    "editor.stickyScroll.enabled": false,
+    "editor.stickyScroll.scrollWithEditor": false,
+    "editor.unicodeHighlight.includeStrings": false,
+    "editor.unicodeHighlight.includeComments": false,
+    "javascript.suggest.autoImports": false,
+    "files.exclude": {
+        ".directory": true
+    },
+    "cSpell.language": "en",
+    "cSpell.userWords": [
+        "bson",
+        "Excretus",
+        "genderize",
+        "linebreak",
+        "miamoremustachio",
+        "oleg",
+        "plusplus",
+        "taskrefs"
+    ],
+    "extensions.autoCheckUpdates": false,
+    "extensions.autoUpdate": false,
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "explorer.compactFolders": false
+}
