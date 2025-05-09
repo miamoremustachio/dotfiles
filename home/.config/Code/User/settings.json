@@ -36,5 +36,6 @@
     "extensions.autoCheckUpdates": false,
     "extensions.autoUpdate": false,
     "terminal.integrated.sendKeybindingsToShell": true,
-    "explorer.compactFolders": false
+    "explorer.compactFolders": false,
+    "chat.commandCenter.enabled": false
 }
