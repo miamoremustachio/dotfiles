@@ -1,4 +1,5 @@
 {
+    "update.mode": "none", // Linux-specific
     "window.zoomLevel": 1, // Linux-specific
     "window.restoreFullscreen": true, // Linux-specific
     "window.newWindowDimensions": "fullscreen", // Linux-specific
