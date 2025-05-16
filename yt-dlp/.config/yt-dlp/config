@@ -1,0 +1,5 @@
+# Download path:
+-P ~/Videos/
+
+# Custom ffmpeg build path:
+--ffmpeg-location ~/.local/share/ffmpeg-master-latest-linux64-gpl/bin/
