@@ -1,4 +1,6 @@
-home/.config/Code/User/*
-!home/.config/Code/User/snippets
-!home/.config/Code/User/keybindings.json
-!home/.config/Code/User/settings.json
+Code/.config/Code/User/*
+!Code/.config/Code/User/snippets
+!Code/.config/Code/User/keybindings.json
+!Code/.config/Code/User/settings.json
+
+micro/.config/micro/buffers/*
