@@ -1,3 +1,5 @@
+**/*lock*
+
 Code/.config/Code/User/*
 !Code/.config/Code/User/snippets
 !Code/.config/Code/User/keybindings.json
