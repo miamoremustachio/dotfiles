@@ -27,16 +27,21 @@
     "cSpell.userWords": [
         "bson",
         "Excretus",
+        "Flatpaks",
         "genderize",
         "linebreak",
         "miamoremustachio",
+        "nuska",
         "oleg",
         "plusplus",
+        "rpms",
         "taskrefs"
     ],
     "extensions.autoCheckUpdates": false,
     "extensions.autoUpdate": false,
     "terminal.integrated.sendKeybindingsToShell": true,
     "explorer.compactFolders": false,
-    "chat.commandCenter.enabled": false
+    "chat.commandCenter.enabled": false,
+    "git.blame.editorDecoration.template": "${subject} (${authorName})",
+    "git.blame.statusBarItem.template": "${authorName}"
 }

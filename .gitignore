@@ -1,8 +1,14 @@
 **/*lock*
 
-Code/.config/Code/User/*
-!Code/.config/Code/User/snippets
-!Code/.config/Code/User/keybindings.json
-!Code/.config/Code/User/settings.json
+**/firefox/**.default-release/*
+!**/firefox/**.default-release/chrome
+!**/firefox/**.default-release/user.js
 
-micro/.config/micro/buffers/*
+**/Code/User/*
+!**/Code/User/snippets
+!**/Code/User/keybindings.json
+!**/Code/User/settings.json
+
+**/micro/buffers/*
+
+**/vlc/vlc-qt-interface.conf

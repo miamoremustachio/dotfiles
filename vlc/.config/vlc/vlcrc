@@ -2949,7 +2949,7 @@ sout-x264-tune=film
 #alsa-audio-channels=6
 
 # Software gain (float)
-alsa-gain=0.512000
+alsa-gain=0.571787
 
 [afile] # File audio output
 
