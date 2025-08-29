@@ -1,9 +1,5 @@
 **/*lock*
 
-**/firefox/**.default-release/*
-!**/firefox/**.default-release/chrome
-!**/firefox/**.default-release/user.js
-
 **/Code/User/*
 !**/Code/User/snippets
 !**/Code/User/keybindings.json
