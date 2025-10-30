@@ -2,9 +2,7 @@
     "update.mode": "none", // Linux-specific
     "window.zoomLevel": 1, // Linux-specific
     "window.restoreFullscreen": true, // Linux-specific
-    "window.newWindowDimensions": "fullscreen", // Linux-specific
-    "window.menuBarVisibility": "toggle",
-    "window.titleBarStyle": "custom", // Gnome-specific~
+    "window.newWindowDimensions": "fullscreen", // Gnome-specific~
     "window.commandCenter": false,
     "workbench.tree.enableStickyScroll": false,
     "workbench.activityBar.location": "top",
@@ -55,5 +53,8 @@
     "explorer.compactFolders": false,
     "chat.commandCenter.enabled": false,
     "git.blame.editorDecoration.template": "${subject} (${authorName})",
-    "git.blame.statusBarItem.template": "${authorName}"
+    "git.blame.statusBarItem.template": "${authorName}",
+    "workbench.secondarySideBar.defaultVisibility": "hidden",
+    "window.menuBarVisibility": "toggle",
+    "terminal.integrated.stickyScroll.enabled": false
 }
