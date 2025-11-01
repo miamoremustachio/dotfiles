@@ -1,3 +1,4 @@
 {
-    "clipboard": "terminal"
+    "clipboardcopy": "wl-copy",
+    "clipboardpaste": "wl-paste"
 }
