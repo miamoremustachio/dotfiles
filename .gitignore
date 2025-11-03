@@ -1,5 +1,7 @@
 **/*lock*
 
+**/bash/*history
+
 **/Code/User/*
 !**/Code/User/snippets
 !**/Code/User/keybindings.json
