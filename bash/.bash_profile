@@ -5,5 +5,6 @@ if [ -f ~/.bashrc ]; then
     . ~/.bashrc
 fi
 
-# User specific environment and startup programs
+# User-specific environment variables
 export EDITOR="/usr/bin/micro"
+export PATH="$PATH:$HOME/.local/bin"

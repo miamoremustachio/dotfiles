@@ -1,0 +1,16 @@
+filetype: sources
+
+detect:
+    filename: ".*\\.sources"
+
+rules:
+    # Mails
+    - special: "[[:alnum:].%_+-]+@[[:alnum:].-]+"
+    # URLs
+    - identifier: "(https?|ftp|ssh)://\\S*[^])>\\s,.]"
+    # Comments
+    - comment: "(^|\\s)#.*$"
+# Newest syntax (for nightly builds only)
+#    - comment:
+#        start: "#"
+#        end: "$"        

@@ -1,4 +1,12 @@
 {
+    "ftdetect": {
+        "unknown": ["*"]
+    },
+
+    "*.conf": {
+        "filetype": "ini"
+    },
+
     "clipboardcopy": "wl-copy",
     "clipboardpaste": "wl-paste"
 }

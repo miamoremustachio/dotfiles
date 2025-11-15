@@ -56,5 +56,7 @@
     "git.blame.statusBarItem.template": "${authorName}",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
     "window.menuBarVisibility": "toggle",
-    "terminal.integrated.stickyScroll.enabled": false
+    "terminal.integrated.stickyScroll.enabled": false,
+    "chat.agent.enabled": false,
+    "chat.disableAIFeatures": true
 }
