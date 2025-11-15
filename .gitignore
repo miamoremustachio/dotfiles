@@ -1,4 +1,5 @@
-**/*lock*
+**/*_lock*
+**/*.lock*
 
 **/bash/*history
 
