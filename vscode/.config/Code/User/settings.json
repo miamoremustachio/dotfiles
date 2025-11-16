@@ -21,7 +21,7 @@
     "files.exclude": {
         ".directory": true
     },
-    "cSpell.language": "en",
+    "cSpell.language": "en, ru, fr",
     "cSpell.userWords": [
         "bson",
         "dconf",
@@ -58,5 +58,6 @@
     "window.menuBarVisibility": "toggle",
     "terminal.integrated.stickyScroll.enabled": false,
     "chat.agent.enabled": false,
-    "chat.disableAIFeatures": true
+    "chat.disableAIFeatures": true,
+    "cSpell.showInRuler": false
 }
