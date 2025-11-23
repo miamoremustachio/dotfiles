@@ -55,9 +55,9 @@
     "git.blame.editorDecoration.template": "${subject} (${authorName})",
     "git.blame.statusBarItem.template": "${authorName}",
     "workbench.secondarySideBar.defaultVisibility": "hidden",
-    "window.menuBarVisibility": "toggle",
     "terminal.integrated.stickyScroll.enabled": false,
     "chat.agent.enabled": false,
     "chat.disableAIFeatures": true,
-    "cSpell.showInRuler": false
+    "cSpell.showInRuler": false,
+    "window.menuBarVisibility": "compact"
 }

@@ -1,12 +1,13 @@
 {
     "ftdetect": {
-        "unknown": ["*"]
+        "unknown": [
+            "*"
+        ]
     },
-
     "*.conf": {
         "filetype": "ini"
     },
-
+    "colorscheme": "atom-dark",
     "clipboardcopy": "wl-copy",
     "clipboardpaste": "wl-paste"
 }

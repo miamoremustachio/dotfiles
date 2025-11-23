@@ -1867,13 +1867,13 @@
 [alsa] # ALSA audio output
 
 # Audio output device (string)
-#alsa-audio-device=default
+alsa-audio-device=
 
 # Audio output channels (integer)
 #alsa-audio-channels=6
 
 # Software gain (float)
-#alsa-gain=1.000000
+alsa-gain=0.860000
 
 [afile] # File audio output
 
@@ -3345,7 +3345,7 @@ qt-privacy-ask=0
 #rmtosd-password=
 
 # VNC poll interval (integer)
-#rmtosd-update=1000
+rmtosd-update=300
 
 # VNC polling (boolean)
 #rmtosd-vnc-polling=0
@@ -3841,10 +3841,10 @@ qt-privacy-ask=0
 #audio-replay-gain-peak-protection=1
 
 # Enable time stretching audio (boolean)
-#audio-time-stretch=1
+audio-time-stretch=0
 
 # Audio output module (string)
-#aout=
+aout=any
 
 # Media role (string)
 #role=video
@@ -3856,7 +3856,7 @@ qt-privacy-ask=0
 #audio-visual=none
 
 # Audio resampler (string)
-#audio-resampler=
+audio-resampler=any
 
 # Enable video (boolean)
 #video=1
@@ -3991,13 +3991,13 @@ qt-privacy-ask=0
 #video-splitter=
 
 # Enable sub-pictures (boolean)
-#spu=1
+spu=0
 
 # On Screen Display (boolean)
-#osd=1
+osd=0
 
 # Text rendering module (string)
-#text-renderer=
+text-renderer=any
 
 # Use subtitle file (string)
 #sub-file=
