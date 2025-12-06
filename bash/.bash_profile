@@ -8,4 +8,6 @@ fi
 # User-specific environment variables
 export EDITOR="/usr/bin/micro"
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-export GTK_USE_PORTAL=1
+
+# Dont enable this shit for god sake
+# export GTK_USE_PORTAL=1
