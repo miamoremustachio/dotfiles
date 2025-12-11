@@ -59,5 +59,14 @@
     "chat.agent.enabled": false,
     "chat.disableAIFeatures": true,
     "cSpell.showInRuler": false,
-    "window.menuBarVisibility": "compact"
+    "window.menuBarVisibility": "compact",
+    "editor.fontFamily": "Lilex Nerd Font",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 15,
+    "terminal.integrated.suggest.quickSuggestions": {
+        "commands": "off",
+        "arguments": "off",
+        "unknown": "off"
+    },
+    "terminal.integrated.suggest.enabled": false
 }
