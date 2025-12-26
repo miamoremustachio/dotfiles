@@ -2,33 +2,34 @@
 #![enable(unwrap_newtypes)]
 #![enable(unwrap_variant_newtypes)]
 (
+    components: {},
     default_album_art_path: None,
     show_song_table_header: true,
     draw_borders: true,
-    format_tag_separator: " | ",
     browser_column_widths: [20, 38, 42],
     background_color: None,
-    text_color: None,
     header_background_color: None,
     modal_background_color: None,
-    modal_backdrop: false,
-    preview_label_style: (fg: "yellow"),
-    preview_metadata_group_style: (fg: "yellow", modifiers: "Bold"),
+    modal_backdrop: true,
+    text_color: None,
+    preview_label_style: (fg: "gray"),
+    preview_metadata_group_style: (fg: "light_cyan", modifiers: "Bold"),
     tab_bar: (
         active_style: (fg: "black", bg: "blue", modifiers: "Bold"),
         inactive_style: (),
     ),
-    highlighted_item_style: (fg: "blue", modifiers: "Bold"),
+    highlighted_item_style: (fg: "light_magenta", modifiers: "Bold"),
     current_item_style: (fg: "black", bg: "blue", modifiers: "Bold"),
     borders_style: (fg: "blue"),
     highlight_border_style: (fg: "blue"),
+    format_tag_separator: " / ",
     symbols: (
-        song: "S",
-        dir: "D",
-        playlist: "P",
-        marker: "M",
+        song: "𝅘𝅥𝅮",
+        dir: "💿",
+        playlist: "𝄞",
+        marker: "* ",
         ellipsis: "...",
-        song_style: None,
+        song_style: (modifiers: "Bold"),
         dir_style: None,
         playlist_style: None,
     ),
@@ -40,10 +41,10 @@
         trace: (fg: "magenta", bg: "black"),
     ),
     progress_bar: (
-        symbols: ["[", "-", ">", " ", "]"],
+        symbols: ["[", "▬", "▬", "▬", "]"],
         track_style: (fg: "#1e2030"),
         elapsed_style: (fg: "blue"),
-        thumb_style: (fg: "blue", bg: "#1e2030"),
+        thumb_style: (fg: "blue"),
         use_track_when_empty: false,
     ),
     scrollbar: (
@@ -55,31 +56,24 @@
     song_table_format: [
         (
             prop: (kind: Property(Artist),
-                default: (kind: Text("Unknown"))
+                default: (kind: Text("Unknown Artist"))
             ),
-            width: "20%",
+            width: "35%",
         ),
         (
             prop: (kind: Property(Title),
                 default: (kind: Text("Unknown"))
             ),
-            width: "35%",
-        ),
-        (
-            prop: (kind: Property(Album), style: (fg: "white"),
-                default: (kind: Text("Unknown Album"), style: (fg: "white"))
-            ),
-            width: "30%",
+            width: "55%",
         ),
         (
             prop: (kind: Property(Duration),
                 default: (kind: Text("-"))
             ),
-            width: "15%",
+            width: "10%",
             alignment: Right,
         ),
     ],
-    components: {},
     layout: Split(
         direction: Vertical,
         panes: [
@@ -105,13 +99,14 @@
         rows: [
             (
                 left: [
-                    (kind: Text("["), style: (fg: "yellow", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "Playing", paused_label: "Paused", stopped_label: "Stopped"))), style: (fg: "yellow", modifiers: "Bold")),
-                    (kind: Text("]"), style: (fg: "yellow", modifiers: "Bold"))
+                    (kind: Text("["), style: (fg: "light_magenta", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: "Playing", paused_label: "Paused", stopped_label: "Stopped"))), style: (fg: "light_magenta", modifiers: "Bold")),
+                    (kind: Text("] "), style: (fg: "light_magenta", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: "Playing", paused_label: "Paused", stopped_label: "Stopped"))), style: (fg: "light_magenta", modifiers: "Bold")),
                 ],
                 center: [
                     (kind: Property(Song(Title)), style: (modifiers: "Bold"),
-                        default: (kind: Text("No Song"), style: (modifiers: "Bold"))
+                        default: (kind: Text("~"), style: (modifiers: "Bold"))
                     )
                 ],
                 right: [
@@ -129,12 +124,12 @@
                     (kind: Text(" kbps)"))
                 ],
                 center: [
-                    (kind: Property(Song(Artist)), style: (fg: "yellow", modifiers: "Bold"),
-                        default: (kind: Text("Unknown"), style: (fg: "yellow", modifiers: "Bold"))
+                    (kind: Property(Song(Artist)), style: (fg: "light_magenta", modifiers: "Italic"),
+                        default: (kind: Text("Unknown"), style: (fg: "light_magenta", modifiers: "Italic"))
                     ),
                     (kind: Text(" - ")),
-                    (kind: Property(Song(Album)),
-                        default: (kind: Text("Unknown Album"))
+                    (kind: Property(Song(Album)), style: (modifiers: "Italic"),
+                        default: (kind: Text("Unknown Album"), style: (modifiers: "Italic"))
                     )
                 ],
                 right: [
@@ -151,17 +146,7 @@
     ),
     browser_song_format: [
         (
-            kind: Group([
-                (kind: Property(Track)),
-                (kind: Text(" ")),
-            ])
-        ),
-        (
-            kind: Group([
-                (kind: Property(Artist)),
-                (kind: Text(" - ")),
-                (kind: Property(Title)),
-            ]),
+            kind: Property(Filename),
             default: (kind: Property(Filename))
         ),
     ],

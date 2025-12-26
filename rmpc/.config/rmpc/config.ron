@@ -39,12 +39,9 @@
             "<Tab>":     NextTab,
             "<S-Tab>":   PreviousTab,
             "1":         SwitchToTab("Queue"),
-            "2":         SwitchToTab("Directories"),
-            "3":         SwitchToTab("Artists"),
-            "4":         SwitchToTab("Album Artists"),
-            "5":         SwitchToTab("Albums"),
-            "6":         SwitchToTab("Playlists"),
-            "7":         SwitchToTab("Search"),
+            "2":         SwitchToTab("Library"),
+            "3":         SwitchToTab("Playlists"),
+            "4":         SwitchToTab("Search"),
             "q":         Quit,
             "<Space>":   TogglePause,
             "p":         TogglePause,
@@ -61,7 +58,7 @@
             "v":         ToggleSingleOnOff,
             "<C>":       ToggleConsume,
             "<V>":       ToggleSingle,
-            "~":         ShowHelp,
+            "`":         ShowHelp,
             "u":         Update,
             "<C-u>":     Rescan,
             "<A-Enter>": ShowCurrentSongInfo,
@@ -111,7 +108,7 @@
             "a":       AddToPlaylist,
             "<Del>":   Delete,
             "C-w":     DeleteAll,
-            "<A-q>":   JumpToCurrent,
+            "e":       JumpToCurrent,
             "X":       Shuffle,
         },
     ),
@@ -124,10 +121,8 @@
             (value: "any",         label: "Any Tag"),
             (value: "artist",      label: "Artist"),
             (value: "album",       label: "Album"),
-            (value: "albumartist", label: "Album Artist"),
             (value: "title",       label: "Title"),
             (value: "filename",    label: "Filename"),
-            (value: "genre",       label: "Genre"),
         ],
     ),
     artists: (
@@ -147,12 +142,12 @@
                             direction: Vertical,
                             panes: [
                                 (
-                                    size: "3",
-                                    pane: Pane(Lyrics)
-                                ),
-                                (
                                     size: "100%",
                                     pane: Pane(AlbumArt)
+                                ),
+                                (
+                                    size: "3",
+                                    pane: Pane(Lyrics)
                                 ),
                             ],
                         ),
@@ -165,20 +160,8 @@
             ),
         ),
         (
-            name: "Directories",
+            name: "Library",
             pane: Pane(Directories),
-        ),
-        (
-            name: "Artists",
-            pane: Pane(Artists),
-        ),
-        (
-            name: "Album Artists",
-            pane: Pane(AlbumArtists),
-        ),
-        (
-            name: "Albums",
-            pane: Pane(Albums),
         ),
         (
             name: "Playlists",
