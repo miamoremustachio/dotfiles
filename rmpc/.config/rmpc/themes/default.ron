@@ -3,7 +3,7 @@
 #![enable(unwrap_variant_newtypes)]
 (
     components: {},
-    default_album_art_path: None,
+    default_album_art_path: "~/.config/rmpc/themes/album_art.jpeg",
     show_song_table_header: true,
     draw_borders: true,
     browser_column_widths: [20, 38, 42],
@@ -24,14 +24,14 @@
     highlight_border_style: (fg: "blue"),
     format_tag_separator: " / ",
     symbols: (
-        song: "𝅘𝅥𝅮",
-        dir: "💿",
+        song: "⛧",
+        dir: "†",
         playlist: "𝄞",
         marker: "* ",
         ellipsis: "...",
-        song_style: (modifiers: "Bold"),
-        dir_style: None,
-        playlist_style: None,
+        song_style: (fg: "light_magenta", modifiers: "Bold"),
+        dir_style: (fg: "dark_gray"),
+        playlist_style: (fg: "dark_gray"),
     ),
     level_styles: (
         info: (fg: "blue", bg: "black"),
@@ -55,13 +55,13 @@
     ),
     song_table_format: [
         (
-            prop: (kind: Property(Artist),
+            prop: (kind: Property(Artist), style: (modifiers: "Italic"),
                 default: (kind: Text("Unknown Artist"))
             ),
             width: "35%",
         ),
         (
-            prop: (kind: Property(Title),
+            prop: (kind: Property(Title), style: (modifiers: "Italic"),
                 default: (kind: Text("Unknown"))
             ),
             width: "55%",
@@ -99,47 +99,55 @@
         rows: [
             (
                 left: [
-                    (kind: Text("["), style: (fg: "light_magenta", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "Playing", paused_label: "Paused", stopped_label: "Stopped"))), style: (fg: "light_magenta", modifiers: "Bold")),
-                    (kind: Text("] "), style: (fg: "light_magenta", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "Playing", paused_label: "Paused", stopped_label: "Stopped"))), style: (fg: "light_magenta", modifiers: "Bold")),
+                    (kind: Text(" ")),
+                    (kind: Text(" "), style: (fg: "light_magenta", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: "  ", paused_label: "  ", stopped_label: "  "))), style: (fg: "light_magenta", modifiers: "Bold")),
+                    (kind: Text("  "), style: (fg: "light_magenta", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: "playing...", paused_label: "paused", stopped_label: "[stopped]"))), style: (fg: "dark_gray", modifiers: "Italic")),
                 ],
                 center: [
-                    (kind: Property(Song(Title)), style: (modifiers: "Bold"),
-                        default: (kind: Text("~"), style: (modifiers: "Bold"))
+                    (kind: Property(Song(Title)), style: (modifiers: "Italic"),
+                        default: (kind: Text("♱"), style: (fg: "dark_gray", modifiers: "Italic"))
                     )
                 ],
                 right: [
                     (kind: Property(Widget(ScanStatus)), style: (fg: "blue")),
-                    (kind: Property(Widget(Volume)), style: (fg: "blue"))
+                    (kind: Property(Widget(Volume)), style: (fg: "blue")),
+                    (kind: Text(" "))
                 ]
             ),
             (
                 left: [
+                    (kind: Text(" ")),
                     (kind: Property(Status(Elapsed))),
                     (kind: Text(" / ")),
                     (kind: Property(Status(Duration))),
-                    (kind: Text(" (")),
-                    (kind: Property(Status(Bitrate))),
-                    (kind: Text(" kbps)"))
+                    (kind: Text(" | "), style: (fg: "dark_gray")),
+                    (kind: Property(Status(Bitrate)), style: (fg: "dark_gray"), default: (kind: Text("0"), style: (fg: "dark_gray"))),
+                    (kind: Text(" kbps"), style: (fg: "dark_gray"))
                 ],
                 center: [
                     (kind: Property(Song(Artist)), style: (fg: "light_magenta", modifiers: "Italic"),
-                        default: (kind: Text("Unknown"), style: (fg: "light_magenta", modifiers: "Italic"))
+                        default: (kind: Text("Amor"), style: (fg: "dark_gray", modifiers: "Italic"))
                     ),
-                    (kind: Text(" - ")),
+                    (kind: Text(" ✧ ")),
                     (kind: Property(Song(Album)), style: (modifiers: "Italic"),
-                        default: (kind: Text("Unknown Album"), style: (modifiers: "Italic"))
+                        default: (kind: Text("Fati"), style: (fg: "dark_gray", modifiers: "Italic"))
                     )
                 ],
                 right: [
-                    (
-                        kind: Property(Widget(States(
-                            active_style: (fg: "white", modifiers: "Bold"),
-                            separator_style: (fg: "white")))
-                        ),
-                        style: (fg: "dark_gray")
-                    ),
+                    (kind: Property(Status(RepeatV2(on_label: "Repeat", off_label: "Repeat",
+                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"))))),
+                    (kind: Text(" / "), style: (fg: "white")),
+                    (kind: Property(Status(RandomV2(on_label: "Random", off_label: "Random",
+                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"))))),
+                    (kind: Text(" / "), style: (fg: "white")),
+                    (kind: Property(Status(ConsumeV2(on_label: "Consume", off_label: "Consume", oneshot_label: "Consume (*)",
+                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"), oneshot_style: (fg: "white", modifiers: "Bold"))))),
+                    (kind: Text(" / "), style: (fg: "white")),
+                    (kind: Property(Status(SingleV2(on_label: "Single", off_label: "Single", oneshot_label: "Single (*)",
+                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"), oneshot_style: (fg: "white", modifiers: "Bold"))))),
+                    (kind: Text(" "))
                 ]
             ),
         ],
