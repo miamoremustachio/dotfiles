@@ -136,8 +136,8 @@
                     )
                 ],
                 right: [
-                    (kind: Property(Status(RepeatV2(on_label: "Repeat", off_label: "Repeat",
-                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"))))),
+                    (kind: Property(Status(SingleV2(on_label: "Single", off_label: "Single", oneshot_label: "Single (*)",
+                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"), oneshot_style: (fg: "white", modifiers: "Bold"))))),
                     (kind: Text(" / "), style: (fg: "white")),
                     (kind: Property(Status(RandomV2(on_label: "Random", off_label: "Random",
                         on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"))))),
@@ -145,8 +145,8 @@
                     (kind: Property(Status(ConsumeV2(on_label: "Consume", off_label: "Consume", oneshot_label: "Consume (*)",
                         on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"), oneshot_style: (fg: "white", modifiers: "Bold"))))),
                     (kind: Text(" / "), style: (fg: "white")),
-                    (kind: Property(Status(SingleV2(on_label: "Single", off_label: "Single", oneshot_label: "Single (*)",
-                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"), oneshot_style: (fg: "white", modifiers: "Bold"))))),
+                    (kind: Property(Status(RepeatV2(on_label: "Repeat", off_label: "Repeat",
+                        on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"))))),
                     (kind: Text(" "))
                 ]
             ),
