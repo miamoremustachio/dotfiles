@@ -38,10 +38,10 @@
             "<A-w>":     Stop,
             "<Tab>":     NextTab,
             "<S-Tab>":   PreviousTab,
-            "1":         SwitchToTab("Queue"),
-            "2":         SwitchToTab("Library"),
-            "3":         SwitchToTab("Playlists"),
-            "4":         SwitchToTab("Search"),
+            "1":         SwitchToTab("vita"),
+            "2":         SwitchToTab("incerta"),
+            "3":         SwitchToTab("mors"),
+            "4":         SwitchToTab("certissima"),
             "q":         Quit,
             "<Space>":   TogglePause,
             "p":         TogglePause,
@@ -178,7 +178,7 @@
     ),
     tabs: [
         (
-            name: "Queue",
+            name: "vita",
             pane: Split(
                 direction: Horizontal,
                 panes: [
@@ -206,15 +206,15 @@
             ),
         ),
         (
-            name: "Library",
+            name: "incerta",
             pane: Pane(Directories),
         ),
         (
-            name: "Playlists",
+            name: "mors",
             pane: Pane(Playlists),
         ),
         (
-            name: "Search",
+            name: "certissima",
             pane: Pane(Search),
         ),
     ],

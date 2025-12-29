@@ -26,8 +26,8 @@
     symbols: (
         song: "⛧",
         dir: "†",
-        playlist: "𝄞",
-        marker: "* ",
+        playlist: "𖤝",
+        marker: "ᛝ ",
         ellipsis: "...",
         song_style: (fg: "light_magenta", modifiers: "Bold"),
         dir_style: (fg: "dark_gray"),
@@ -41,17 +41,17 @@
         trace: (fg: "magenta", bg: "black"),
     ),
     progress_bar: (
-        symbols: ["[", "▬", "▬", "▬", "]"],
+        symbols: ["⫘", "⫘", "⫘", "⫘", "⫘"],
         track_style: (fg: "#1e2030"),
-        elapsed_style: (fg: "blue"),
-        thumb_style: (fg: "blue"),
+        elapsed_style: (fg: "gray"),
+        thumb_style: (fg: "gray"),
         use_track_when_empty: false,
     ),
     scrollbar: (
-        symbols: ["│", "█", "▲", "▼"],
-        track_style: (),
-        ends_style: (),
-        thumb_style: (fg: "blue"),
+        symbols: ["│", "│", "⮝", "⮟"],
+        track_style: (fg: "dark_gray"),
+        ends_style: (fg: "dark_gray"),
+        thumb_style: (fg: "gray"),
     ),
     song_table_format: [
         (
@@ -99,11 +99,11 @@
         rows: [
             (
                 left: [
-                    (kind: Text(" ")),
-                    (kind: Text(" "), style: (fg: "light_magenta", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "  ", paused_label: "  ", stopped_label: "  "))), style: (fg: "light_magenta", modifiers: "Bold")),
-                    (kind: Text("  "), style: (fg: "light_magenta", modifiers: "Bold")),
-                    (kind: Property(Status(StateV2(playing_label: "playing...", paused_label: "paused", stopped_label: "[stopped]"))), style: (fg: "dark_gray", modifiers: "Italic")),
+                    (kind: Text("")),
+                    // (kind: Text(" "), style: (fg: "white", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: " 🫀 ", paused_label: " 🥀 ", stopped_label: " 🪦 "))), style: (fg: "light_magenta", modifiers: "Bold")),
+                    // (kind: Text("  "), style: (fg: "white", modifiers: "Bold")),
+                    (kind: Property(Status(StateV2(playing_label: "playing...", paused_label: "paused", stopped_label: "stopped."))), style: (fg: "dark_gray", modifiers: "Italic")),
                 ],
                 center: [
                     (kind: Property(Song(Title)), style: (modifiers: "Italic"),
@@ -128,23 +128,23 @@
                 ],
                 center: [
                     (kind: Property(Song(Artist)), style: (fg: "light_magenta", modifiers: "Italic"),
-                        default: (kind: Text("Amor"), style: (fg: "dark_gray", modifiers: "Italic"))
+                        default: (kind: Text("☽ Amor"), style: (fg: "dark_gray", modifiers: "Italic"))
                     ),
                     (kind: Text(" ✧ ")),
                     (kind: Property(Song(Album)), style: (modifiers: "Italic"),
-                        default: (kind: Text("Fati"), style: (fg: "dark_gray", modifiers: "Italic"))
+                        default: (kind: Text("Fati ☾"), style: (fg: "dark_gray", modifiers: "Italic"))
                     )
                 ],
                 right: [
                     (kind: Property(Status(SingleV2(on_label: "Single", off_label: "Single", oneshot_label: "Single (*)",
                         on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"), oneshot_style: (fg: "white", modifiers: "Bold"))))),
-                    (kind: Text(" / "), style: (fg: "white")),
+                    (kind: Text(" ‧ "), style: (fg: "white")),
                     (kind: Property(Status(RandomV2(on_label: "Random", off_label: "Random",
                         on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"))))),
-                    (kind: Text(" / "), style: (fg: "white")),
+                    (kind: Text(" ‧ "), style: (fg: "white")),
                     (kind: Property(Status(ConsumeV2(on_label: "Consume", off_label: "Consume", oneshot_label: "Consume (*)",
                         on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"), oneshot_style: (fg: "white", modifiers: "Bold"))))),
-                    (kind: Text(" / "), style: (fg: "white")),
+                    (kind: Text(" ‧ "), style: (fg: "white")),
                     (kind: Property(Status(RepeatV2(on_label: "Repeat", off_label: "Repeat",
                         on_style: (fg: "white", modifiers: "Bold"), off_style: (fg: "dark_gray"))))),
                     (kind: Text(" "))

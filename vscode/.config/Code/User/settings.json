@@ -68,5 +68,26 @@
         "arguments": "off",
         "unknown": "off"
     },
-    "terminal.integrated.suggest.enabled": false
+    "terminal.integrated.suggest.enabled": false,
+    "terminal.integrated.profiles.linux": {
+        "bash": {
+            "path": "/usr/bin/bash",
+            "icon": "terminal-bash"
+        },
+        "zsh": {
+            "path": "/usr/bin/zsh"
+        },
+        "fish": {
+            "path": "fish"
+        },
+        "tmux": {
+            "path": "tmux",
+            "icon": "terminal-tmux"
+        },
+        "pwsh": {
+            "path": "pwsh",
+            "icon": "terminal-powershell"
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh"
 }
