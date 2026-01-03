@@ -1,38 +1,39 @@
-local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
-local user_host="%B%(!.%{$fg[red]%}.%{$fg[green]%})%n@%m%{$reset_color%} "
-local user_symbol='%(!.#.$)'
-local current_dir="%B%{$fg[blue]%}%~ %{$reset_color%}"
-local conda_prompt='$(conda_prompt_info)'
+# Define color palette
+RED="%{$fg[red]%}"
+GREEN="%{$fg[green]%}"
+YELLOW="%{$fg[yellow]%}"
+BLUE="%{$fg[blue]%}"
+MAGENTA="%{$fg[magenta]%}"
+CYAN="%{$fg[cyan]%}"
+GRAY="%F{8}"
+RESET="%{$reset_color%}"
+  
+local return_code="%(?..${RED}%? ↵${RESET})"
+local user_host="%B%(!.${RED}.${CYAN})%n@%m${RESET} "
+local user_symbol='%(!.💀.😺)'
+local current_dir="%B${BLUE}%~ ${RESET}"
 
 local vcs_branch='$(git_prompt_info)$(hg_prompt_info)'
-local rvm_ruby='$(ruby_prompt_info)'
 local venv_prompt='$(virtualenv_prompt_info)'
+
+# Kubernetes shit
 if [[ "${plugins[@]}" =~ 'kube-ps1' ]]; then
-    local kube_prompt='$(kube_ps1)'
+  local kube_prompt='$(kube_ps1)'
 else
-    local kube_prompt=''
+  local kube_prompt=''
 fi
 
-ZSH_THEME_RVM_PROMPT_OPTIONS="i v g"
-
-PROMPT="╭─${conda_prompt}${user_host}${current_dir}${rvm_ruby}${vcs_branch}${venv_prompt}${kube_prompt}
+# Prompt
+PROMPT="╭─${user_host}${current_dir}${vcs_branch}${venv_prompt}${kube_prompt}
 ╰─%B${user_symbol}%b "
 RPROMPT="%B${return_code}%b"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
-ZSH_THEME_GIT_PROMPT_SUFFIX="› %{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[red]%}●%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[yellow]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{\e[3m%}${GRAY}["
+ZSH_THEME_GIT_PROMPT_SUFFIX="] %{\e[0m%}%f${RESET}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{\e[3m%}${RED} S ${GRAY}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{\e[3m%}${YELLOW}"
 
-ZSH_THEME_HG_PROMPT_PREFIX="$ZSH_THEME_GIT_PROMPT_PREFIX"
-ZSH_THEME_HG_PROMPT_SUFFIX="$ZSH_THEME_GIT_PROMPT_SUFFIX"
-ZSH_THEME_HG_PROMPT_DIRTY="$ZSH_THEME_GIT_PROMPT_DIRTY"
-ZSH_THEME_HG_PROMPT_CLEAN="$ZSH_THEME_GIT_PROMPT_CLEAN"
-
-ZSH_THEME_RUBY_PROMPT_PREFIX="%{$fg[red]%}‹"
-ZSH_THEME_RUBY_PROMPT_SUFFIX="› %{$reset_color%}"
-
-ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="%{$fg[green]%}‹"
-ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="› %{$reset_color%}"
+ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX="${GREEN}‹"
+ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX="› ${RESET}"
 ZSH_THEME_VIRTUALENV_PREFIX="$ZSH_THEME_VIRTUAL_ENV_PROMPT_PREFIX"
 ZSH_THEME_VIRTUALENV_SUFFIX="$ZSH_THEME_VIRTUAL_ENV_PROMPT_SUFFIX"
