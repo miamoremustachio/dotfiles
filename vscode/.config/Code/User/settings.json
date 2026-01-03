@@ -89,5 +89,6 @@
             "icon": "terminal-powershell"
         }
     },
-    "terminal.integrated.defaultProfile.linux": "zsh"
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "terminal.integrated.shellIntegration.decorationsEnabled": "never"
 }
