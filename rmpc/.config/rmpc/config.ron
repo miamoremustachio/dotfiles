@@ -4,7 +4,7 @@
 (
     address: "127.0.0.1:6600",
     password: None,
-    theme: "default",
+    theme: "osculum_mortis",
     cache_dir: None,
     lyrics_dir: None,
     volume_step: 5,

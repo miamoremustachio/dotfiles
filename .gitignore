@@ -10,4 +10,8 @@
 
 **/micro/buffers/*
 
+**/mpd/database
+
+**/qBittorrent/*data*
+
 **/vlc/vlc-qt-interface.conf
