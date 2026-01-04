@@ -19,7 +19,7 @@ RESET_C="%{$reset_color%}"
 
 local return_code="%(?..${RED}%? ❰ ${RESET_C})"
 local user_host="%B%(!.${RED}.${CYAN})%n${WHITE}‧%(!.${RED}.${CYAN})%m${RESET_C} "
-local user_symbol='%(?.$(random_emoji).💥)'
+local user_symbol='%(?.$(random_emoji).${EMOJI_FAIL})'
 local current_dir="%B${BLUE}%~ ${RESET_C}"
 
 local vcs_branch='$(git_prompt_info)'
@@ -29,14 +29,21 @@ local venv_prompt='$(virtualenv_prompt_info)'
 # │
 # ✦ ─ Emoji sets ──────────────────────────────────────────────────────────────────────────────────
 
-EMOJI_DEFAULT=(💩 🐦 🚀 🍕 👽 ☕️ 🔬 💀 🐷 🐧 🐳 🍔 🍣 🍻 🔮 💰 💎 💾 🍪 🌞 🐌 🍄 )
+EMOJI_DEFAULT=(💩 🐦 🚀 🍕 👽 ☕️ 🐧 🔮 💎 💾 🐌 🍄 )
+EMOJI_FAIL='💥'
 EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
+EMOJI_AUSTRALIA_DAY=(🦘 🇦🇺 🐨 🐊 🕷️ 🍺 🏄 🪃 🌊 )
 EMOJI_CHINESE_NY=(🐲 🧧 🥮 🐉 🍊 🥠 🪭 🎆 🫖 🥟 🏮 )
+EMOJI_ST_PATRICK=(🍻 ☘️ 💚 🍀 🪉 🇮🇪 🌈 )
 EMOJI_SHUNBUN_NO_HI=(🌸 )
-EMOJI_NOWRUZ=(🌷 🌱 🪻 ☀️ 🕌 💚 🐫 )
+EMOJI_NOWRUZ=(🌷 🌱 🪻 ☀️ 🕌 🍏 🐫 )
 EMOJI_EASTER=(🥚 🪺 ⛪ 🩷 🐝 🐇 🎗️ 🐣 🍫 🥕 🌼 🔔 🧺 )
-EMOJI_SONGKRAN=(🐘 🔫 🌊 🏵️ 🧡 🛵 💦 )
-EMOJI_INDEPENDENCE_DAY=(🗽 🌭 🇺🇸 🎺 🥜 🦅 📜 🏈 )
+EMOJI_SONGKRAN=(🐘 🔫 🏵️ 🧡 🛵 💦 )
+EMOJI_CINCO_DE_MAYO=(🌮 🇲🇽 💃 🥑 🌵 🌶️ 🪅 )
+EMOJI_FESTA_DELLA_REPUBBLICA=(🍕 🍝 🇮🇹 🏛️ 🤌 )
+EMOJI_CANADA_DAY=(🍁 🦫 🥞 🇨🇦 🏒 🥌 )
+EMOJI_INDEPENDENCE_DAY=(🗽 🌭 🇺🇸 🎺 🍔 🥜 🦅 📜 🏈 )
+EMOJI_BASTILLE_DAY=(🥖 🍷 🇫🇷 📽️ 🥐 🏰 🎈 )
 EMOJI_HALLOWEEN=(🎃 👻 🍬 🕸️ 🦇 💀 🍷 ⚰️ 🕷️ 🪦 🧟 )
 EMOJI_BUNKA_NO_HI=(🎎 🎐 🍙 🍡 🍣 🍶 🍥 🗼 🍢 💮 🍘 🥢 🍤 🍵 🎏 👘 ⛩️ )
 EMOJI_THANKSGIVING=(🦃 🌰 🍗 🌽 🕯️ 🍄‍🟫 🙏 🍂 🥧 )
@@ -50,6 +57,14 @@ function is_xmas_season() {
   # Dec 18 → 12.18
   # Jan 7  → 1.07
   (( current_date >= 1218 || current_date <= 107 ))
+}
+
+function is_australia_day() {
+  local current_date
+  current_date=10#$(date +%m%d)
+
+  # Jan 26 → 1.26
+  (( current_date == 126 ))
 }
 
 function is_chinese_new_year() {
@@ -144,12 +159,44 @@ function is_songkran() {
   (( current_date >= 413 && current_date <= 415 ))
 }
 
+function is_may_5th() {
+  local current_date
+  current_date=10#$(date +%m%d)
+
+  # May 5 → 5.05
+  (( current_date == 505 ))
+}
+
+function is_italian_national_day() {
+  local current_date
+  current_date=10#$(date +%m%d)
+
+  # Jun 2 → 6.02
+  (( current_date == 602 ))
+}
+
+function is_canada_day() {
+  local current_date
+  current_date=10#$(date +%m%d)
+
+  # Jul 1 → 7.01
+  (( current_date == 701 ))
+}
+
 function is_july_4th() {
   local current_date
   current_date=10#$(date +%m%d)
 
-  # Jul 4 → 7.04 
+  # Jul 4 → 7.04
   (( current_date == 704 ))
+}
+
+function is_bastille_day() {
+  local current_date
+  current_date=10#$(date +%m%d)
+
+  # Jul 14 → 7.14
+  (( current_date == 714 ))
 }
 
 function is_halloween() {
@@ -216,6 +263,10 @@ random_from_array() {
 function random_emoji() {
   if is_xmas_season; then
     random_from_array EMOJI_XMAS
+  elif is_australia_day; then
+    random_from_array EMOJI_AUSTRALIA_DAY
+  elif is_chinese_new_year; then
+    random_from_array EMOJI_CHINESE_NY
   elif is_vernal_equinox; then
     random_from_array EMOJI_SHUNBUN_NO_HI
   elif is_nowruz; then
@@ -224,8 +275,16 @@ function random_emoji() {
     random_from_array EMOJI_EASTER
   elif is_songkran; then
     random_from_array EMOJI_SONGKRAN
+  elif is_may_5th; then
+    random_from_array EMOJI_CINCO_DE_MAYO
+  elif is_italian_national_day; then
+    random_from_array EMOJI_FESTA_DELLA_REPUBBLICA
+  elif is_canada_day; then
+    random_from_array EMOJI_CANADA_DAY
   elif is_july_4th; then
     random_from_array EMOJI_INDEPENDENCE_DAY
+  elif is_bastille_day; then
+    random_from_array EMOJI_BASTILLE_DAY
   elif is_halloween; then
     random_from_array EMOJI_HALLOWEEN
   elif is_japanese_culture_day; then
@@ -239,8 +298,6 @@ function random_emoji() {
 
 # ╭── 𖹭 EXTRA 𖹭 ───────────────────────────────────────────────────────────────────────────────────
 # │
-# ✦ ─ Kubernetes shit
-
 if [[ "${plugins[@]}" =~ 'kube-ps1' ]]; then
   local kube_prompt='$(kube_ps1)'
 else
