@@ -30,13 +30,16 @@ local venv_prompt='$(virtualenv_prompt_info)'
 # ✦ ─ Emoji sets ──────────────────────────────────────────────────────────────────────────────────
 
 EMOJI_DEFAULT=(💩 🐦 🚀 🍕 👽 ☕️ 🔬 💀 🐷 🐧 🐳 🍔 🍣 🍻 🔮 💰 💎 💾 🍪 🌞 🐌 🍄 )
-EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🍫 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
+EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
 EMOJI_CHINESE_NY=(🐲 🧧 🥮 🐉 🍊 🥠 🪭 🎆 🫖 🥟 🏮 )
 EMOJI_SHUNBUN_NO_HI=(🌸 )
 EMOJI_NOWRUZ=(🌷 🌱 🪻 ☀️ 🕌 💚 🐫 )
-EMOJI_SONGKRAN=(🐘 🔫 🌊 🏵️ 🙏 🧡 🛵 💦 )
-EMOJI_HALLOWEEN=(🎃 👻 🍬 🕸️ 🦇 💀 🍷 ⚰️ 🍂 🕷️ 🪦 🕯️ 🧟 )
+EMOJI_EASTER=(🥚 🪺 ⛪ 🩷 🐝 🐇 🎗️ 🐣 🍫 🥕 🌼 🔔 🧺 )
+EMOJI_SONGKRAN=(🐘 🔫 🌊 🏵️ 🧡 🛵 💦 )
+EMOJI_INDEPENDENCE_DAY=(🗽 🌭 🇺🇸 🎺 🥜 🦅 📜 🏈 )
+EMOJI_HALLOWEEN=(🎃 👻 🍬 🕸️ 🦇 💀 🍷 ⚰️ 🕷️ 🪦 🧟 )
 EMOJI_BUNKA_NO_HI=(🎎 🎐 🍙 🍡 🍣 🍶 🍥 🗼 🍢 💮 🍘 🥢 🍤 🍵 🎏 👘 ⛩️ )
+EMOJI_THANKSGIVING=(🦃 🌰 🍗 🌽 🕯️ 🍄‍🟫 🙏 🍂 🥧 )
 
 # ✦ ─ Holiday checks ──────────────────────────────────────────────────────────────────────────────
 
@@ -99,6 +102,39 @@ function is_nowruz() {
   (( current_date >= 321 && current_date <= 323 ))
 }
 
+function is_easter() {
+  local current_year
+  local current_date
+  current_year=$(date +%Y)
+  current_date=10#$(date +%m%d)
+
+  local eve
+  local end
+
+  case $current_year in
+    2026)
+      # Mar 29 → 3.29
+      eve=329
+      # Apr 5 → 4.05
+      end=405
+      # etc.
+      ;;
+    2027)
+      eve=321
+      end=328
+      ;;
+    2028)
+      eve=409
+      end=416
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+
+  (( current_date >= eve && current_date <= end ))
+}
+
 function is_songkran() {
   local current_date
   current_date=10#$(date +%m%d)
@@ -106,6 +142,14 @@ function is_songkran() {
   # Apr 13 → 4.13
   # Apr 15 → 4.15
   (( current_date >= 413 && current_date <= 415 ))
+}
+
+function is_july_4th() {
+  local current_date
+  current_date=10#$(date +%m%d)
+
+  # Jul 4 → 7.04 
+  (( current_date == 704 ))
 }
 
 function is_halloween() {
@@ -123,6 +167,39 @@ function is_japanese_culture_day() {
 
   # Nov 3 → 11.03
   (( current_date == 1103 ))
+}
+
+function is_thanksgiving() {
+  local current_year
+  local current_date
+  current_year=$(date +%Y)
+  current_date=10#$(date +%m%d)
+
+  local eve
+  local end
+
+  case $current_year in
+    2026)
+      # Nov 19 → 11.19
+      eve=1119
+      # Nov 26 → 11.26
+      end=1126
+      # etc.
+      ;;
+    2027)
+      eve=1118
+      end=1125
+      ;;
+    2028)
+      eve=1116
+      end=1123
+      ;;
+    *)
+      return 1
+      ;;
+  esac
+
+  (( current_date >= eve && current_date <= end ))
 }
 
 # ✦ ─ Randomizer ──────────────────────────────────────────────────────────────────────────────────
@@ -143,12 +220,18 @@ function random_emoji() {
     random_from_array EMOJI_SHUNBUN_NO_HI
   elif is_nowruz; then
     random_from_array EMOJI_NOWRUZ
+  elif is_easter; then
+    random_from_array EMOJI_EASTER
   elif is_songkran; then
     random_from_array EMOJI_SONGKRAN
+  elif is_july_4th; then
+    random_from_array EMOJI_INDEPENDENCE_DAY
   elif is_halloween; then
     random_from_array EMOJI_HALLOWEEN
   elif is_japanese_culture_day; then
     random_from_array EMOJI_BUNKA_NO_HI
+  elif is_thanksgiving; then
+    random_from_array EMOJI_THANKSGIVING
   else
     random_from_array EMOJI_DEFAULT
   fi
