@@ -90,5 +90,15 @@
         }
     },
     "terminal.integrated.defaultProfile.linux": "zsh",
-    "terminal.integrated.shellIntegration.decorationsEnabled": "never"
+    "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+    "editor.tokenColorCustomizations": { // For italic comments
+        "textMateRules": [
+            {
+                "scope": "comment",
+                "settings": {
+                    "fontStyle": "italic"
+                }
+            }
+        ]
+    }
 }

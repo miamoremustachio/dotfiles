@@ -15,11 +15,14 @@ ITALIC="%{\e[3m%}"
 RESET_I="%{\e[0m%}"
 RESET_C="%{$reset_color%}"
 
+CURRENT_YEAR=$(date +%Y)
+CURRENT_DATE=10#$(date +%m%d)
+
 # ✦ ─ Local variables ─────────────────────────────────────────────────────────────────────────────
 
 local return_code="%(?..${RED}%? ❰ ${RESET_C})"
 local user_host="%B%(!.${RED}.${CYAN})%n${WHITE}‧%(!.${RED}.${CYAN})%m${RESET_C} "
-local user_symbol='%(?.$(random_emoji).${EMOJI_FAIL})'
+local user_symbol='%(?.$(get_emoji).${EMOJI_FAIL})'
 local current_dir="%B${BLUE}%~ ${RESET_C}"
 
 local vcs_branch='$(git_prompt_info)'
@@ -30,103 +33,80 @@ local venv_prompt='$(virtualenv_prompt_info)'
 # ✦ ─ Emoji sets ──────────────────────────────────────────────────────────────────────────────────
 
 EMOJI_DEFAULT=(🐦 🍕 👽 ☕️ 🐧 🔮 💎 💾 🐌 🍄 )
-EMOJI_FAIL='💥'
+EMOJI_FAIL="💥"
 EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
-EMOJI_EDUCATION_DAY=(🎓 📖 📚 )
-EMOJI_AUSTRALIA_DAY=(🦘 🇦🇺 🐨 🐊 🕷️ 🍺 🏄 🪃 🌊 )
+EMOJI_EDUCATION=(🎓 📖 📚 )
+EMOJI_AUSTRALIA=(🦘 🇦🇺 🐨 🐊 🕷️ 🍺 🏄 🪃 🌊 )
 EMOJI_CANDLE=(🕯️ )
-EMOJI_RADIO_DAY=(📻 🎙️ 🎧 )
-EMOJI_VALENTINE_DAY=(💘 💞 💕 💝 💖 💌 )
+EMOJI_RADIO=(📻 🎙️ 🎧 )
+EMOJI_LOVE=(💘 💞 💕 💝 💖 💌 )
 EMOJI_CHINESE_NY=(🐲 🧧 🥮 🐉 🍊 🥠 🪭 🎆 🫖 🥟 🏮 )
-EMOJI_WOMEN_DAY=(♀️ )
+EMOJI_FEMALE=(♀️ )
 EMOJI_ST_PATRICK=(🍻 ☘️ 💚 🍀 🪉 🇮🇪 )
-EMOJI_SHUNBUN_NO_HI=(🌸 )
+EMOJI_SAKURA=(🌸 )
 EMOJI_NOWRUZ=(🌷 🌱 🪻 ☀️ 🕌 🍏 🐫 )
 EMOJI_ZERO_WASTE=(♻️ )
 EMOJI_AUTISM=(♾️ 🧩 🌈 )
 EMOJI_SPACE=(🚀 🪐 🛸 🌜 🛰️ 📡 💫 🔭 ☄️ )
 EMOJI_SONGKRAN=(🐘 🔫 🏵️ 🧡 🛵 💦 )
-EMOJI_EARTH_DAY=(🌍 🌎 🌏 )
+EMOJI_EARTH=(🌍 🌎 🌏 )
 EMOJI_EASTER=(🥚 🪺 ⛪ 🩷 🐝 🐇 🎗️ 🐣 🍫 🥕 🌼 🔔 🧺 )
 EMOJI_JAZZ=(🎷 🪊 🎹 🥁 🎼 )
-EMOJI_CINCO_DE_MAYO=(🌮 🇲🇽 💃 🥑 🌵 🌶️ 🪅 )
-EMOJI_VICTORY_DAY=(🎖️ 🪖 ✌️ )
+EMOJI_MEXICO=(🌮 🇲🇽 💃 🥑 🌵 🌶️ 🪅 )
+EMOJI_VICTORY=(🎖️ 🪖 ✌️ )
 EMOJI_FOOTBALL=(⚽ )
 EMOJI_POTATO=(🥔 🍠 🍟 )
-EMOJI_FESTA_DELLA_REPUBBLICA=(🍕 🍝 🇮🇹 🏛️ 🤌 )
-EMOJI_CANADA_DAY=(🍁 🦫 🥞 🇨🇦 🏒 🥌 )
-EMOJI_INDEPENDENCE_DAY=(🗽 🌭 🇺🇸 🎺 🍔 🥜 🦅 📜 🏈 )
-EMOJI_BASTILLE_DAY=(🥖 🍷 🇫🇷 📽️ 🥐 🏰 🎈 )
-EMOJI_LABOR_DAY=(🦺 ⛑️ 💼 ⛏️ ⚒️ 🛠️ 🔧 🧰 🔬 )
+EMOJI_ITALY=(🍕 🍝 🇮🇹 🏛️ 🤌 )
+EMOJI_CANADA=(🍁 🦫 🥞 🇨🇦 🏒 🥌 )
+EMOJI_USA=(🗽 🌭 🇺🇸 🎺 🍔 🥜 🦅 📜 🏈 )
+EMOJI_FRANCE=(🥖 🍷 🇫🇷 📽️ 🥐 🏰 🎈 )
+EMOJI_LABOR=(🦺 ⛑️ 💼 ⛏️ ⚒️ 🛠️ 🔧 🧰 🔬 )
 EMOJI_POST=(✉️ 📯 📮 🏣 📫 📪 📬 📭 📨 )
-EMOJI_UN_DAY=(🇺🇳 )
+EMOJI_UN=(🇺🇳 )
 EMOJI_HALLOWEEN=(🎃 👻 🍬 🕸️ 🦇 💀 🍷 ⚰️ 🕷️ 🪦 🧟 )
-EMOJI_BUNKA_NO_HI=(🎎 🎐 🍙 🍡 🍣 🍶 🍥 🗼 🍢 💮 🍘 🥢 🍤 🍵 🎏 👘 ⛩️ )
-EMOJI_TOILET_DAY=(🚽 🧻 💩 )
+EMOJI_JAPAN=(🎎 🎐 🍙 🍡 🍣 🍶 🍥 🗼 🍢 💮 🍘 🥢 🍤 🍵 🎏 👘 ⛩️ )
+EMOJI_TOILET=(🚽 🧻 💩 )
 EMOJI_THANKSGIVING=(🦃 🌰 🍗 🌽 🕯️ 🍄‍🟫 🙏 🍂 🥧 )
 EMOJI_BASKETBALL=(🏀 )
 
 # ✦ ─ Holiday checks ──────────────────────────────────────────────────────────────────────────────
 
 function is_xmas_season() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Dec 23 → 12.23
   # Jan 7  → 1.07
-  (( current_date >= 1223 || current_date <= 107 ))
+  (( CURRENT_DATE >= 1223 || CURRENT_DATE <= 107 ))
 }
 
 function is_education_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Jan 24 → 1.24
-  (( current_date == 124 ))
+  (( CURRENT_DATE == 124 ))
 }
 
 function is_australia_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Jan 26 → 1.26
-  (( current_date == 126 ))
+  (( CURRENT_DATE == 126 ))
 }
 
 function is_holocaust_remembrance_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Jan 27 → 1.27
-  (( current_date == 127 ))
+  (( CURRENT_DATE == 127 ))
 }
 
 function is_radio_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Feb 13 → 2.13
-  (( current_date == 213 ))
+  (( CURRENT_DATE == 213 ))
 }
 
 function is_valentine_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Feb 14 → 2.14
-  (( current_date == 214 ))
+  (( CURRENT_DATE == 214 ))
 }
 
 function is_chinese_new_year() {
-  local current_year
-  local current_date
-  current_year=$(date +%Y)
-  current_date=10#$(date +%m%d)
-
   local eve
   local end
 
-  case $current_year in
+  case $CURRENT_YEAR in
     2026)
       # Feb 17 → 2.17
       eve=217
@@ -147,93 +127,61 @@ function is_chinese_new_year() {
       ;;
   esac
 
-  (( current_date >= eve && current_date <= end ))
+  (( CURRENT_DATE >= eve && CURRENT_DATE <= end ))
 }
 
 function is_women_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Mar 8 → 3.08
-  (( current_date == 308 ))
+  (( CURRENT_DATE == 308 ))
 }
 
 function is_saint_patrick_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Mar 17 → 3.17
-  (( current_date == 317 ))
+  (( CURRENT_DATE == 317 ))
 }
 
 function is_vernal_equinox() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Mar 20 → 3.20
-  (( current_date == 320 ))
+  (( CURRENT_DATE == 320 ))
 }
 
 function is_nowruz() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Mar 21 → 3.21
   # Mar 23 → 3.23
-  (( current_date >= 321 && current_date <= 323 ))
+  (( CURRENT_DATE >= 321 && CURRENT_DATE <= 323 ))
 }
 
 function is_zero_waste_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Mar 30 → 3.30
-  (( current_date == 330 ))
+  (( CURRENT_DATE == 330 ))
 }
 
 function is_autism_awareness_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Apr 2 → 4.02
-  (( current_date == 402 ))
+  (( CURRENT_DATE == 402 ))
 }
 
 function is_human_space_flight_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Apr 12 → 4.12
-  (( current_date == 412 ))
+  (( CURRENT_DATE == 412 ))
 }
 
 function is_songkran() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Apr 13 → 4.13
   # Apr 15 → 4.15
-  (( current_date >= 413 && current_date <= 415 ))
+  (( CURRENT_DATE >= 413 && CURRENT_DATE <= 415 ))
 }
 
 function is_earth_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Apr 22 → 4.22
-  (( current_date == 422 ))
+  (( CURRENT_DATE == 422 ))
 }
 
 function is_easter() {
-  local current_year
-  local current_date
-  current_year=$(date +%Y)
-  current_date=10#$(date +%m%d)
-
   local eve
   local end
 
-  case $current_year in
+  case $CURRENT_YEAR in
     2026)
       # Mar 29 → 3.29
       eve=329
@@ -254,86 +202,58 @@ function is_easter() {
       ;;
   esac
 
-  (( current_date >= eve && current_date <= end ))
+  (( CURRENT_DATE >= eve && CURRENT_DATE <= end ))
 }
 
 function is_jazz_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Apr 30 → 4.30
-  (( current_date == 430 ))
+  (( CURRENT_DATE == 430 ))
 }
 
-function is_may_5th() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
+function is_cinco_de_mayo() {
   # May 5 → 5.05
-  (( current_date == 505 ))
+  (( CURRENT_DATE == 505 ))
 }
 
 function is_victory_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # May 8 → 5.08
   # May 9 → 5.09
-  (( current_date >= 508 && current_date <= 509 ))
+  (( CURRENT_DATE >= 508 && CURRENT_DATE <= 509 ))
 }
 
 function is_football_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # May 25 → 5.25
-  (( current_date == 525 ))
+  (( CURRENT_DATE == 525 ))
 }
 
 function is_potato_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # May 30 → 5.30
-  (( current_date == 530 ))
+  (( CURRENT_DATE == 530 ))
 }
 
 function is_italian_national_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Jun 2 → 6.02
-  (( current_date == 602 ))
+  (( CURRENT_DATE == 602 ))
 }
 
 function is_canada_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Jul 1 → 7.01
-  (( current_date == 701 ))
+  (( CURRENT_DATE == 701 ))
 }
 
 function is_july_4th() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Jul 4 → 7.04
-  (( current_date == 704 ))
+  (( CURRENT_DATE == 704 ))
 }
 
 function is_bastille_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Jul 14 → 7.14
-  (( current_date == 714 ))
+  (( CURRENT_DATE == 714 ))
 }
 
 function is_labor_day() {
-  local day
-  local month
-  local weekday
+  local day month weekday
+
   day=10#$(date +%d)
   month=10#$(date +%m)
   weekday=$(date +%u) # Monday → 1 <...> Sunday → 7
@@ -342,85 +262,59 @@ function is_labor_day() {
 }
 
 function is_world_post_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Oct 9 → 10.09
-  (( current_date == 1009 ))
+  (( CURRENT_DATE == 1009 ))
 }
 
 function is_united_nations_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Oct 24 → 10.24
-  (( current_date == 1024 ))
+  (( CURRENT_DATE == 1024 ))
 }
 
 function is_halloween() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Oct 25 → 10.25
   # Oct 31 → 10.31
-  (( current_date >= 1025 && current_date <= 1031 ))
+  (( CURRENT_DATE >= 1025 && CURRENT_DATE <= 1031 ))
 }
 
 function is_japanese_culture_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Nov 3 → 11.03
-  (( current_date == 1103 ))
+  (( CURRENT_DATE == 1103 ))
 }
 
 function is_toilet_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Nov 19 → 11.19
-  (( current_date == 1119 ))
+  (( CURRENT_DATE == 1119 ))
 }
 
-function is_thanksgiving() {
-  local current_year
-  local current_date
-  current_year=$(date +%Y)
-  current_date=10#$(date +%m%d)
+function is_thanksgiving_season() {
+  local thanksgiving today diff
 
-  local eve
-  local end
+  # Find Thanksgiving:
 
-  case $current_year in
-    2026)
-      # Nov 19 → 11.19
-      eve=1119
-      # Nov 26 → 11.26
-      end=1126
-      # etc.
-      ;;
-    2027)
-      eve=1118
-      end=1125
-      ;;
-    2028)
-      eve=1116
-      end=1123
-      ;;
-    *)
-      return 1
-      ;;
-  esac
+  # 1) Get the ISO weekday number of Nov 1
+  local nov_1st_weekday=$(date -d "$CURRENT_YEAR-11-01" +%u)
 
-  (( current_date >= eve && current_date <= end ))
+  # 2) Calculate the number of days to the first Thursday
+  local days_to_first_thursday=$(( (4 - $nov_1st_weekday + 7) % 7 ))
+
+  # 3) Add 3 weeks (21 days) to first Thursday
+  local days_to_thanksgiving=$(( $days_to_first_thursday + 21 ))
+
+  # 4) Get Thanksgiving & current timestamps
+  thanksgiving=$(date -d "$CURRENT_YEAR-11-01 +$days_to_thanksgiving days" +%s)  
+  today=$(date +%s)
+
+  # Diggerence from today to Thanksgiving (in days)
+  # 86400 → seconds in a day
+  diff=$(( (thanksgiving - today) / 86400 ))
+
+  (( diff >= 0 && diff <= 7 ))
 }
 
 function is_basketball_day() {
-  local current_date
-  current_date=10#$(date +%m%d)
-
   # Dec 21 → 12.21
-  (( current_date == 1221 ))
+  (( CURRENT_DATE == 1221 ))
 }
 
 # ✦ ─ Randomizer ──────────────────────────────────────────────────────────────────────────────────
@@ -432,29 +326,29 @@ random_from_array() {
   echo -n "${arr[RANDOM % ${#arr[@]} + 1]}"
 }
 
-# ✦ ─ Emoji print ─────────────────────────────────────────────────────────────────────────────────
+# ✦ ─ Pick the right set ──────────────────────────────────────────────────────────────────────────
 
-function random_emoji() {
+function get_emoji() {
   if is_xmas_season; then
     random_from_array EMOJI_XMAS
   elif is_education_day; then
-    random_from_array EMOJI_EDUCATION_DAY
+    random_from_array EMOJI_EDUCATION
   elif is_australia_day; then
-    random_from_array EMOJI_AUSTRALIA_DAY
+    random_from_array EMOJI_AUSTRALIA
   elif is_holocaust_remembrance_day; then
     random_from_array EMOJI_CANDLE
   elif is_radio_day; then
-    random_from_array EMOJI_RADIO_DAY
+    random_from_array EMOJI_RADIO
   elif is_valentine_day; then
-    random_from_array EMOJI_VALENTINE_DAY
+    random_from_array EMOJI_LOVE
   elif is_chinese_new_year; then
     random_from_array EMOJI_CHINESE_NY
   elif is_women_day; then
-    random_from_array EMOJI_WOMEN_DAY
+    random_from_array EMOJI_FEMALE
   elif is_saint_patrick_day; then
     random_from_array EMOJI_ST_PATRICK
   elif is_vernal_equinox; then
-    random_from_array EMOJI_SHUNBUN_NO_HI
+    random_from_array EMOJI_SAKURA
   elif is_nowruz; then
     random_from_array EMOJI_NOWRUZ
   elif is_zero_waste_day; then
@@ -466,40 +360,40 @@ function random_emoji() {
   elif is_songkran; then
     random_from_array EMOJI_SONGKRAN
   elif is_earth_day; then
-    random_from_array EMOJI_EARTH_DAY
+    random_from_array EMOJI_EARTH
   elif is_easter; then
     random_from_array EMOJI_EASTER
   elif is_jazz_day; then
     random_from_array EMOJI_JAZZ
-  elif is_may_5th; then
-    random_from_array EMOJI_CINCO_DE_MAYO
+  elif is_cinco_de_mayo; then
+    random_from_array EMOJI_MEXICO
   elif is_victory_day; then
-    random_from_array EMOJI_VICTORY_DAY
+    random_from_array EMOJI_VICTORY
   elif is_football_day; then
     random_from_array EMOJI_FOOTBALL
   elif is_potato_day; then
     random_from_array EMOJI_POTATO
   elif is_italian_national_day; then
-    random_from_array EMOJI_FESTA_DELLA_REPUBBLICA
+    random_from_array EMOJI_ITALY
   elif is_canada_day; then
-    random_from_array EMOJI_CANADA_DAY
+    random_from_array EMOJI_CANADA
   elif is_july_4th; then
-    random_from_array EMOJI_INDEPENDENCE_DAY
+    random_from_array EMOJI_USA
   elif is_bastille_day; then
-    random_from_array EMOJI_BASTILLE_DAY
+    random_from_array EMOJI_FRANCE
   elif is_labor_day; then
-   random_from_array EMOJI_LABOR_DAY
+   random_from_array EMOJI_LABOR
   elif is_world_post_day; then
     random_from_array EMOJI_POST
   elif is_united_nations_day; then
-    random_from_array EMOJI_UN_DAY
+    random_from_array EMOJI_UN
   elif is_halloween; then
     random_from_array EMOJI_HALLOWEEN
   elif is_japanese_culture_day; then
-    random_from_array EMOJI_BUNKA_NO_HI
+    random_from_array EMOJI_JAPAN
   elif is_toilet_day; then
-    random_from_array EMOJI_TOILET_DAY
-  elif is_thanksgiving; then
+    random_from_array EMOJI_TOILET
+  elif is_thanksgiving_season; then
     random_from_array EMOJI_THANKSGIVING
   elif is_basketball_day; then
     random_from_array EMOJI_BASKETBALL
