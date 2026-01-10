@@ -100,5 +100,8 @@
                 }
             }
         ]
-    }
+    },
+    "terminal.integrated.fontFamily": "Lilex Nerd Font",
+    "terminal.integrated.fontLigatures.enabled": true,
+    "terminal.integrated.mouseWheelZoom": true
 }

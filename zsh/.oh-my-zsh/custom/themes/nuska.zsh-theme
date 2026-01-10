@@ -15,14 +15,14 @@ ITALIC="%{\e[3m%}"
 RESET_I="%{\e[0m%}"
 RESET_C="%{$reset_color%}"
 
-CURRENT_YEAR=$(date +%Y)
-CURRENT_DATE=10#$(date +%m%d)
+typeset -i CURRENT_YEAR=$(date +%Y)
+typeset -i CURRENT_DATE=10#$(date +%m%d)
 
 # ✦ ─ Local variables ─────────────────────────────────────────────────────────────────────────────
 
 local return_code="%(?..${RED}%? ❰ ${RESET_C})"
 local user_host="%B%(!.${RED}.${CYAN})%n${WHITE}‧%(!.${RED}.${CYAN})%m${RESET_C} "
-local user_symbol='%(?.$(get_emoji).${EMOJI_FAIL})'
+local user_symbol='%(?.$(get_emoji).${FAIL})'
 local current_dir="%B${BLUE}%~ ${RESET_C}"
 
 local vcs_branch='$(git_prompt_info)'
@@ -32,42 +32,56 @@ local venv_prompt='$(virtualenv_prompt_info)'
 # │
 # ✦ ─ Emoji sets ──────────────────────────────────────────────────────────────────────────────────
 
-EMOJI_DEFAULT=(🐦 🍕 👽 ☕️ 🐧 🔮 💎 💾 🐌 🍄 )
-EMOJI_FAIL="💥"
+EMOJI_DEFAULT=(💬 🦴 🐱 🦄 🐁 🐛 🤍 🐍 🐢 🤘 🐚 🌴 🌹 🍸 🪿 🍓 🍞 🍌 🍆 🧁 🫪 ☠️ 🖖 🧠 🥾 🎩
+🫦 👠 🧚‍♀️ 🐑 👑 💸 🧃 ✨ 🎱 🎲 🚬 🗿 👽 🩼 💭 🦭 🥡 🐸 🧋 🍔 🪄 🎯 ⚾ 📦 👛 👒 ☕️ 🎸 🔮 💎 💾 )
+EMOJI_CATS=(🐱 😺 😸 😹 😻 😼 😽 🙀 😿 😾 )
 EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
+EMOJI_CHEESE=(🧀 )
 EMOJI_EDUCATION=(🎓 📖 📚 )
 EMOJI_AUSTRALIA=(🦘 🇦🇺 🐨 🐊 🕷️ 🍺 🏄 🪃 🌊 )
 EMOJI_CANDLE=(🕯️ )
+EMOJI_UMBRELLA=(☂️ 🌂 )
 EMOJI_RADIO=(📻 🎙️ 🎧 )
 EMOJI_LOVE=(💘 💞 💕 💝 💖 💌 )
-EMOJI_CHINESE_NY=(🐲 🧧 🥮 🐉 🍊 🥠 🪭 🎆 🫖 🥟 🏮 )
+EMOJI_CHINESE_NY=(🐲 🧧 🥮 🐉 🍊 🥠 🪭 🎆 🫖 🏮 )
+EMOJI_TOOTH=(🦷 )
 EMOJI_FEMALE=(♀️ )
+EMOJI_MARIO=(🏰 👸🏼 🍄 🐢 ☁️ 👲🏻 )
 EMOJI_ST_PATRICK=(🍻 ☘️ 💚 🍀 🪉 🇮🇪 )
 EMOJI_SAKURA=(🌸 )
 EMOJI_NOWRUZ=(🌷 🌱 🪻 ☀️ 🕌 🍏 🐫 )
+EMOJI_WAFFLE=(🧇 )
 EMOJI_ZERO_WASTE=(♻️ )
 EMOJI_AUTISM=(♾️ 🧩 🌈 )
 EMOJI_SPACE=(🚀 🪐 🛸 🌜 🛰️ 📡 💫 🔭 ☄️ )
 EMOJI_SONGKRAN=(🐘 🔫 🏵️ 🧡 🛵 💦 )
 EMOJI_EARTH=(🌍 🌎 🌏 )
+EMOJI_PENGUIN=(🐧 )
 EMOJI_EASTER=(🥚 🪺 ⛪ 🩷 🐝 🐇 🎗️ 🐣 🍫 🥕 🌼 🔔 🧺 )
+EMOJI_PRETZEL=(🥨 )
 EMOJI_JAZZ=(🎷 🪊 🎹 🥁 🎼 )
-EMOJI_MEXICO=(🌮 🇲🇽 💃 🥑 🌵 🌶️ 🪅 )
+EMOJI_MEXICO=(🌮 🇲🇽 💃 🥑 🪇 🌵 🌶️ 🪅 )
 EMOJI_VICTORY=(🎖️ 🪖 ✌️ )
 EMOJI_FOOTBALL=(⚽ )
 EMOJI_POTATO=(🥔 🍠 🍟 )
+EMOJI_DONUT=(🍩 )
 EMOJI_ITALY=(🍕 🍝 🇮🇹 🏛️ 🤌 )
 EMOJI_CANADA=(🍁 🦫 🥞 🇨🇦 🏒 🥌 )
 EMOJI_USA=(🗽 🌭 🇺🇸 🎺 🍔 🥜 🦅 📜 🏈 )
-EMOJI_FRANCE=(🥖 🍷 🇫🇷 📽️ 🥐 🏰 🎈 )
+EMOJI_FRANCE=(🥖 🇫🇷 ⚜️ 📽️ 🥐 🏰 🎈 )
+EMOJI_WATERMELON=(🍉 )
 EMOJI_LABOR=(🦺 ⛑️ 💼 ⛏️ ⚒️ 🛠️ 🔧 🧰 🔬 )
+EMOJI_PIEROGI=(🥟 )
 EMOJI_POST=(✉️ 📯 📮 🏣 📫 📪 📬 📭 📨 )
 EMOJI_UN=(🇺🇳 )
 EMOJI_HALLOWEEN=(🎃 👻 🍬 🕸️ 🦇 💀 🍷 ⚰️ 🕷️ 🪦 🧟 )
 EMOJI_JAPAN=(🎎 🎐 🍙 🍡 🍣 🍶 🍥 🗼 🍢 💮 🍘 🥢 🍤 🍵 🎏 👘 ⛩️ )
 EMOJI_TOILET=(🚽 🧻 💩 )
 EMOJI_THANKSGIVING=(🦃 🌰 🍗 🌽 🕯️ 🍄‍🟫 🙏 🍂 🥧 )
+EMOJI_MONKEY=(🐵 🙈 🙉 🙊 )
 EMOJI_BASKETBALL=(🏀 )
+FAIL="💥"
+PI="π"
 
 # ✦ ─ Holiday checks ──────────────────────────────────────────────────────────────────────────────
 
@@ -75,6 +89,17 @@ function is_xmas_season() {
   # Dec 23 → 12.23
   # Jan 7  → 1.07
   (( CURRENT_DATE >= 1223 || CURRENT_DATE <= 107 ))
+}
+
+function is_nothing_day() {
+  # Jan 16 → 1.16
+  (( CURRENT_DATE == 116 ))
+}
+
+function is_cheese_day() {
+  # Jan 20 → 1.20
+  # Jun 04 → 6.04
+  (( CURRENT_DATE == 120 || CURRENT_DATE == 604 ))
 }
 
 function is_education_day() {
@@ -92,6 +117,11 @@ function is_holocaust_remembrance_day() {
   (( CURRENT_DATE == 127 ))
 }
 
+function is_umbrella_day() {
+  # Feb 10 → 2.10
+  (( CURRENT_DATE == 210 ))
+}
+
 function is_radio_day() {
   # Feb 13 → 2.13
   (( CURRENT_DATE == 213 ))
@@ -100,6 +130,16 @@ function is_radio_day() {
 function is_valentine_day() {
   # Feb 14 → 2.14
   (( CURRENT_DATE == 214 ))
+}
+
+function is_cat_day() {
+  # Aug 8 → 8.08 (International)
+  # Oct 29 → 10.29 (US)
+  # Feb 22 → 2.22 (Japan)
+  # Mar 01 → 3.01 (Russia)
+  local -a cat_days=(222 301 808 1029)
+
+  (( ${cat_days[(Ie)$CURRENT_DATE]} ))
 }
 
 function is_chinese_new_year() {
@@ -130,9 +170,24 @@ function is_chinese_new_year() {
   (( CURRENT_DATE >= eve && CURRENT_DATE <= end ))
 }
 
+function is_dentist_day() {
+  # Mar 6 → 3.06
+  (( CURRENT_DATE == 306 ))
+}
+
 function is_women_day() {
   # Mar 8 → 3.08
   (( CURRENT_DATE == 308 ))
+}
+
+function is_mario_day() {
+  # Mar 10 → 3.10
+  (( CURRENT_DATE == 310 ))
+}
+
+function is_pi_day() {
+  # Mar 14 → 3.14
+  (( CURRENT_DATE == 314 ))
 }
 
 function is_saint_patrick_day() {
@@ -151,6 +206,13 @@ function is_nowruz() {
   (( CURRENT_DATE >= 321 && CURRENT_DATE <= 323 ))
 }
 
+function is_waffle_day() {
+  # Mar 25 → 3.25 (Sweden)
+  # Aug 24 → 8.24 (US)
+
+  (( CURRENT_DATE == 325 || CURRENT_DATE == 824 ))
+}
+
 function is_zero_waste_day() {
   # Mar 30 → 3.30
   (( CURRENT_DATE == 330 ))
@@ -161,7 +223,7 @@ function is_autism_awareness_day() {
   (( CURRENT_DATE == 402 ))
 }
 
-function is_human_space_flight_day() {
+function is_yuris_night() {
   # Apr 12 → 4.12
   (( CURRENT_DATE == 412 ))
 }
@@ -175,6 +237,11 @@ function is_songkran() {
 function is_earth_day() {
   # Apr 22 → 4.22
   (( CURRENT_DATE == 422 ))
+}
+
+function is_penguin_day() {
+  # Apr 25 → 4.25
+  (( CURRENT_DATE == 425 ))
 }
 
 function is_easter() {
@@ -205,9 +272,25 @@ function is_easter() {
   (( CURRENT_DATE >= eve && CURRENT_DATE <= end ))
 }
 
+
+function is_pretzel_day() {
+  # Apr 26 → 4.26
+  (( CURRENT_DATE == 426 ))
+}
+
 function is_jazz_day() {
   # Apr 30 → 4.30
   (( CURRENT_DATE == 430 ))
+}
+
+function is_space_day() {
+  local day month weekday
+
+  day=10#$(date +%d)
+  month=10#$(date +%m)
+  weekday=$(date +%u) # Monday → 1 <...> Sunday → 7
+
+  (( weekday == 5 && month == 5 && day <= 7 ))
 }
 
 function is_cinco_de_mayo() {
@@ -231,6 +314,16 @@ function is_potato_day() {
   (( CURRENT_DATE == 530 ))
 }
 
+function is_donut_day() {
+  local day month weekday
+
+  day=10#$(date +%d)
+  month=10#$(date +%m)
+  weekday=$(date +%u) # Monday → 1 <...> Sunday → 7
+
+  (( weekday == 5 && month == 6 && day <= 7 ))
+}
+
 function is_italian_national_day() {
   # Jun 2 → 6.02
   (( CURRENT_DATE == 602 ))
@@ -251,6 +344,16 @@ function is_bastille_day() {
   (( CURRENT_DATE == 714 ))
 }
 
+function is_emoji_day() {
+  # Jul 17 → 7.17
+  (( CURRENT_DATE == 110 ))
+}
+
+function is_watermelon_day() {
+  # Aug 3 → 8.03
+  (( CURRENT_DATE == 803 ))
+}
+
 function is_labor_day() {
   local day month weekday
 
@@ -259,6 +362,11 @@ function is_labor_day() {
   weekday=$(date +%u) # Monday → 1 <...> Sunday → 7
 
   (( weekday == 1 && month == 9 && day <= 7 ))
+}
+
+function is_pierogi_day() {
+  # Oct 8 → 10.08
+  (( CURRENT_DATE == 1008 ))
 }
 
 function is_world_post_day() {
@@ -288,28 +396,34 @@ function is_toilet_day() {
 }
 
 function is_thanksgiving_season() {
+  local nov_1st_weekday days_to_first_thursday days_to_thanksgiving
   local thanksgiving today diff
 
   # Find Thanksgiving:
 
   # 1) Get the ISO weekday number of Nov 1
-  local nov_1st_weekday=$(date -d "$CURRENT_YEAR-11-01" +%u)
+  nov_1st_weekday=$(date -d "$CURRENT_YEAR-11-01" +%u)
 
   # 2) Calculate the number of days to the first Thursday
-  local days_to_first_thursday=$(( (4 - $nov_1st_weekday + 7) % 7 ))
+  days_to_first_thursday=$(( (4 - $nov_1st_weekday + 7) % 7 ))
 
   # 3) Add 3 weeks (21 days) to first Thursday
-  local days_to_thanksgiving=$(( $days_to_first_thursday + 21 ))
+  days_to_thanksgiving=$(( $days_to_first_thursday + 21 ))
 
   # 4) Get Thanksgiving & current timestamps
   thanksgiving=$(date -d "$CURRENT_YEAR-11-01 +$days_to_thanksgiving days" +%s)  
   today=$(date +%s)
 
-  # Diggerence from today to Thanksgiving (in days)
+  # Difference from today to Thanksgiving (in days)
   # 86400 → seconds in a day
   diff=$(( (thanksgiving - today) / 86400 ))
 
   (( diff >= 0 && diff <= 7 ))
+}
+
+function is_monkey_day() {
+  # Dec 14 → 12.14
+  (( CURRENT_DATE == 1214 ))
 }
 
 function is_basketball_day() {
@@ -331,40 +445,62 @@ random_from_array() {
 function get_emoji() {
   if is_xmas_season; then
     random_from_array EMOJI_XMAS
+  elif is_nothing_day; then
+    echo -n "⁤"
+  elif is_cheese_day; then
+    random_from_array EMOJI_CHEESE
   elif is_education_day; then
     random_from_array EMOJI_EDUCATION
   elif is_australia_day; then
     random_from_array EMOJI_AUSTRALIA
   elif is_holocaust_remembrance_day; then
     random_from_array EMOJI_CANDLE
+  elif is_umbrella_day; then
+    random_from_array EMOJI_UMBRELLA
   elif is_radio_day; then
     random_from_array EMOJI_RADIO
   elif is_valentine_day; then
     random_from_array EMOJI_LOVE
+  elif is_cat_day; then
+    random_from_array EMOJI_CATS
   elif is_chinese_new_year; then
     random_from_array EMOJI_CHINESE_NY
+  elif is_dentist_day; then
+    random_from_array EMOJI_TOOTH
   elif is_women_day; then
     random_from_array EMOJI_FEMALE
+  elif is_mario_day; then
+    random_from_array EMOJI_MARIO
+  elif is_pi_day; then
+    echo -n "$PI"
   elif is_saint_patrick_day; then
     random_from_array EMOJI_ST_PATRICK
   elif is_vernal_equinox; then
     random_from_array EMOJI_SAKURA
   elif is_nowruz; then
     random_from_array EMOJI_NOWRUZ
+  elif is_waffle_day; then
+    random_from_array EMOJI_WAFFLE
   elif is_zero_waste_day; then
     random_from_array EMOJI_ZERO_WASTE
   elif is_autism_awareness_day; then
     random_from_array EMOJI_AUTISM
-  elif is_human_space_flight_day; then
+  elif is_yuris_night; then
     random_from_array EMOJI_SPACE
   elif is_songkran; then
     random_from_array EMOJI_SONGKRAN
   elif is_earth_day; then
     random_from_array EMOJI_EARTH
+  elif is_penguin_day; then
+    random_from_array EMOJI_PENGUIN
   elif is_easter; then
     random_from_array EMOJI_EASTER
+  elif is_pretzel_day; then
+    random_from_array EMOJI_PRETZEL
   elif is_jazz_day; then
     random_from_array EMOJI_JAZZ
+  elif is_space_day; then
+    random_from_array EMOJI_SPACE
   elif is_cinco_de_mayo; then
     random_from_array EMOJI_MEXICO
   elif is_victory_day; then
@@ -373,6 +509,8 @@ function get_emoji() {
     random_from_array EMOJI_FOOTBALL
   elif is_potato_day; then
     random_from_array EMOJI_POTATO
+  elif is_donut_day; then
+    random_from_array EMOJI_DONUT
   elif is_italian_national_day; then
     random_from_array EMOJI_ITALY
   elif is_canada_day; then
@@ -381,8 +519,12 @@ function get_emoji() {
     random_from_array EMOJI_USA
   elif is_bastille_day; then
     random_from_array EMOJI_FRANCE
+  elif is_watermelon_day; then
+    random_from_array EMOJI_WATERMELON
   elif is_labor_day; then
    random_from_array EMOJI_LABOR
+  elif is_pierogi_day; then
+    random_from_array EMOJI_PIEROGI
   elif is_world_post_day; then
     random_from_array EMOJI_POST
   elif is_united_nations_day; then
@@ -395,6 +537,8 @@ function get_emoji() {
     random_from_array EMOJI_TOILET
   elif is_thanksgiving_season; then
     random_from_array EMOJI_THANKSGIVING
+  elif is_monkey_day; then
+    random_from_array EMOJI_MONKEY
   elif is_basketball_day; then
     random_from_array EMOJI_BASKETBALL
   else
