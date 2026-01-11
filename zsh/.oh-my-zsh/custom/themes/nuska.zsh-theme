@@ -20,9 +20,9 @@ typeset -i CURRENT_DATE=10#$(date +%m%d)
 
 # ✦ ─ Local variables ─────────────────────────────────────────────────────────────────────────────
 
-local return_code="%(?..${RED}%? ❰ ${RESET_C})"
+local return_code="%(?..${RED}%? ❰${RESET_C})"
 local user_host="%B%(!.${RED}.${CYAN})%n${WHITE}‧%(!.${RED}.${CYAN})%m${RESET_C} "
-local user_symbol='%(?.$(get_emoji).${FAIL})'
+local user_symbol='%(?.%{$(get_emoji)%}  .${FAIL})'
 local current_dir="%B${BLUE}%~ ${RESET_C}"
 
 local vcs_branch='$(git_prompt_info)'
@@ -35,6 +35,8 @@ local venv_prompt='$(virtualenv_prompt_info)'
 EMOJI_DEFAULT=(💬 🦴 🐱 🦄 🐁 🐛 🤍 🐍 🐢 🤘 🐚 🌴 🌹 🍸 🪿 🍓 🍞 🍌 🍆 🧁 🫪 ☠️ 🖖 🧠 🥾 🎩
 🫦 👠 🧚‍♀️ 🐑 👑 💸 🧃 ✨ 🎱 🎲 🚬 🗿 👽 🩼 💭 🦭 🥡 🐸 🧋 🍔 🪄 🎯 ⚾ 📦 👛 👒 ☕️ 🎸 🔮 💎 💾 )
 EMOJI_CATS=(🐱 😺 😸 😹 😻 😼 😽 🙀 😿 😾 )
+EMOJI_QUEER=(❤️ 🩷 🧡 💛 💚 🩵 💙 💜 🏳️‍🌈 )
+EMOJI_TRANS=(🩵 🩷 🤍 🩷 🩵 🏳️‍⚧️ )
 EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
 EMOJI_CHEESE=(🧀 )
 EMOJI_EDUCATION=(🎓 📖 📚 )
@@ -53,6 +55,7 @@ EMOJI_NOWRUZ=(🌷 🌱 🪻 ☀️ 🕌 🍏 🐫 )
 EMOJI_WAFFLE=(🧇 )
 EMOJI_ZERO_WASTE=(♻️ )
 EMOJI_AUTISM=(♾️ 🧩 🌈 )
+EMOJI_ACE=(🖤 🩶 🤍 💜 🍰 )
 EMOJI_SPACE=(🚀 🪐 🛸 🌜 🛰️ 📡 💫 🔭 ☄️ )
 EMOJI_SONGKRAN=(🐘 🔫 🏵️ 🧡 🛵 💦 )
 EMOJI_EARTH=(🌍 🌎 🌏 )
@@ -218,9 +221,19 @@ function is_zero_waste_day() {
   (( CURRENT_DATE == 330 ))
 }
 
+function is_trans_visibility_day() {
+  # Mar 31 → 3.31
+  (( CURRENT_DATE == 331 ))
+}
+
 function is_autism_awareness_day() {
   # Apr 2 → 4.02
   (( CURRENT_DATE == 402 ))
+}
+
+function is_asexuality_day() {
+  # Apr 6 → 4.06
+  (( CURRENT_DATE == 406 ))
 }
 
 function is_yuris_night() {
@@ -329,6 +342,12 @@ function is_italian_national_day() {
   (( CURRENT_DATE == 602 ))
 }
 
+function is_pride_month() {
+  month=10#$(date +%m)
+
+  (( month == 6 ))
+}
+
 function is_canada_day() {
   # Jul 1 → 7.01
   (( CURRENT_DATE == 701 ))
@@ -342,11 +361,6 @@ function is_july_4th() {
 function is_bastille_day() {
   # Jul 14 → 7.14
   (( CURRENT_DATE == 714 ))
-}
-
-function is_emoji_day() {
-  # Jul 17 → 7.17
-  (( CURRENT_DATE == 110 ))
 }
 
 function is_watermelon_day() {
@@ -483,8 +497,12 @@ function get_emoji() {
     random_from_array EMOJI_WAFFLE
   elif is_zero_waste_day; then
     random_from_array EMOJI_ZERO_WASTE
+  elif is_trans_visibility_day; then
+    random_from_array EMOJI_TRANS
   elif is_autism_awareness_day; then
     random_from_array EMOJI_AUTISM
+  elif is_asexuality_day; then
+    random_from_array EMOJI_ACE
   elif is_yuris_night; then
     random_from_array EMOJI_SPACE
   elif is_songkran; then
@@ -513,6 +531,8 @@ function get_emoji() {
     random_from_array EMOJI_DONUT
   elif is_italian_national_day; then
     random_from_array EMOJI_ITALY
+  elif is_pride_month; then
+    random_from_array EMOJI_QUEER
   elif is_canada_day; then
     random_from_array EMOJI_CANADA
   elif is_july_4th; then
