@@ -15,18 +15,35 @@ ITALIC="%{\e[3m%}"
 RESET_I="%{\e[0m%}"
 RESET_C="%{$reset_color%}"
 
+# ✮ SET ⋆ YOUR ⋆ BIRTHDAY ⋆ HERE ✮
+# ⋆ Use mmdd format:              │
+# ⋆ January 27 → 127              │
+# ⋆ March 5 → 305                 │
+# ⋆ etc.                          │
+typeset -i BIRTHDAY=0000 # <-─────╯
+
 typeset -i CURRENT_YEAR=$(date +%Y)
 typeset -i CURRENT_DATE=10#$(date +%m%d)
 
 # ✦ ─ Local variables ─────────────────────────────────────────────────────────────────────────────
 
-local return_code="%(?..${RED}%? ❰${RESET_C})"
-local user_host="%B%(!.${RED}.${CYAN})%n${WHITE}‧%(!.${RED}.${CYAN})%m${RESET_C} "
-local user_symbol='%(?.%{$(get_emoji)%}  .${FAIL})'
-local current_dir="%B${BLUE}%~ ${RESET_C}"
+local user_name="%(!.${RED}.${CYAN})%n"
+local host_name="%(!.${RED}.${CYAN})%m"
+local user_prompt
 
-local vcs_branch='$(git_prompt_info)'
+if (( CURRENT_DATE == BIRTHDAY )); then
+  user_prompt="%Bજ⁀➴˚｡✧${CYAN}happy b${WHITE}★${CYAN}day ${user_name}!${RESET_C}%B✧ ༘⭒｡˚%b"
+else
+  user_prompt="%B${user_name}${WHITE}‧${host_name}${RESET_C}"
+fi
+
+local current_dir="%B${BLUE}%~${RESET_C}"
+local return_code="%B%(?..${RED}%? ❰${RESET_C})"
+
+local vcs_prompt='$(git_prompt_info)'
 local venv_prompt='$(virtualenv_prompt_info)'
+
+local emoji='%B%(?.%{$(get_emoji)%}  .${FAIL})%b'
 
 # ╭── 𖹭 EMOJI 𖹭 ───────────────────────────────────────────────────────────────────────────────────
 # │
@@ -37,6 +54,7 @@ EMOJI_DEFAULT=(💬 🦴 🐱 🦄 🐁 🐛 🤍 🐍 🐢 🤘 🐚 🌴 🌹 
 EMOJI_CATS=(🐱 😺 😸 😹 😻 😼 😽 🙀 😿 😾 )
 EMOJI_QUEER=(❤️ 🩷 🧡 💛 💚 🩵 💙 💜 🏳️‍🌈 )
 EMOJI_TRANS=(🩵 🩷 🤍 🩷 🩵 🏳️‍⚧️ )
+EMOJI_CAKE=(🎂 )
 EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
 EMOJI_CHEESE=(🧀 )
 EMOJI_EDUCATION=(🎓 📖 📚 )
@@ -87,6 +105,10 @@ FAIL="💥"
 PI="π"
 
 # ✦ ─ Holiday checks ──────────────────────────────────────────────────────────────────────────────
+
+function is_your_birthday() {
+  (( CURRENT_DATE == BIRTHDAY ))
+}
 
 function is_xmas_season() {
   # Dec 23 → 12.23
@@ -457,7 +479,9 @@ random_from_array() {
 # ✦ ─ Pick the right set ──────────────────────────────────────────────────────────────────────────
 
 function get_emoji() {
-  if is_xmas_season; then
+  if is_your_birthday; then
+    random_from_array EMOJI_CAKE
+  elif is_xmas_season; then
     random_from_array EMOJI_XMAS
   elif is_nothing_day; then
     echo -n "⁤"
@@ -576,9 +600,9 @@ fi
 
 # ╭── 𖹭 PROMPT 𖹭 ──────────────────────────────────────────────────────────────────────────────────
 # │
-PROMPT="╭─${user_host}${current_dir}${vcs_branch}${venv_prompt}${kube_prompt}
-╰─%B${user_symbol}%b "
-RPROMPT="%B${return_code}%b"
+PROMPT="╭─${user_prompt} ${current_dir} ${vcs_prompt}${venv_prompt}${kube_prompt}
+╰─${emoji} "
+RPROMPT="${return_code}"
 
 ZSH_THEME_GIT_PROMPT_PREFIX="${GRAY}✦ ${ITALIC}"
 ZSH_THEME_GIT_PROMPT_SUFFIX=" ${RESET_I}%f${RESET_C}"
