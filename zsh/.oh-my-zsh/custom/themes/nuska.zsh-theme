@@ -4,9 +4,7 @@
 
 RED="%{$fg[red]%}"
 GREEN="%{$fg[green]%}"
-YELLOW="%{$fg[yellow]%}"
 BLUE="%{$fg[blue]%}"
-MAGENTA="%{$fg[magenta]%}"
 CYAN="%{$fg[cyan]%}"
 WHITE="%{$fg[white]%}"
 GRAY="%F{8}"
@@ -49,11 +47,10 @@ local emoji='%B%(?.%{$(get_emoji)%}  .${FAIL})%b'
 # │
 # ✦ ─ Emoji sets ──────────────────────────────────────────────────────────────────────────────────
 
-EMOJI_DEFAULT=(💬 🦴 🐱 🦄 🐁 🐛 🤍 🐍 🐢 🤘 🐚 🌴 🌹 🍸 🪿 🍓 🍞 🍌 🍆 🧁 🫪 ☠️ 🖖 🧠 🥾 🎩
-🫦 👠 🧚‍♀️ 🐑 👑 💸 🧃 ✨ 🎱 🎲 🚬 🗿 👽 🩼 💭 🦭 🥡 🐸 🧋 🍔 🪄 🎯 ⚾ 📦 👛 👒 ☕️ 🎸 🔮 💎 💾 )
-EMOJI_CATS=(🐱 😺 😸 😹 😻 😼 😽 🙀 😿 😾 )
+EMOJI_DEFAULT=(💬 🦴 🐱 🦄 🐁 🐛 🤍 🐍 🐢 🐚 🌴 🌹 🍸 🪿 🍓 🍞 🍌 🍆 🧁 🫪 ☠️ 🖖 🧠 🥾 💰 📌 🛸
+🫦 👠 🧚‍♀️ 🐑 👑 💸 🧃 ✨ 🎱 🎲 🚬 🗿 👽 🩼 💭 🦭 🥡 🧋 🪵 🍔 🪄 🎯 ⚾ 📦 👛 👒 ☕️ 🎸 🔮 💎 💾 )
+EMOJI_CATS=(🐱 😺 😸 😹 😻 😼 😽 🙀 😿 😾 🧶 )
 EMOJI_QUEER=(❤️ 🩷 🧡 💛 💚 🩵 💙 💜 🏳️‍🌈 )
-EMOJI_TRANS=(🩵 🩷 🤍 🩷 🩵 🏳️‍⚧️ )
 EMOJI_CAKE=(🎂 )
 EMOJI_XMAS=(🎄 🎅 🎇 🎉 🍾 🎁 🦌 ☃️ 🛷 🥂 ❄️ 🧣 🍪 ⛸️ 🎀 )
 EMOJI_CHEESE=(🧀 )
@@ -72,15 +69,16 @@ EMOJI_SAKURA=(🌸 )
 EMOJI_NOWRUZ=(🌷 🌱 🪻 ☀️ 🕌 🍏 🐫 )
 EMOJI_WAFFLE=(🧇 )
 EMOJI_ZERO_WASTE=(♻️ )
+EMOJI_TRANS=(🩵 🩷 🤍 🩷 🩵 🏳️‍⚧️ )
 EMOJI_AUTISM=(♾️ 🧩 🌈 )
 EMOJI_ACE=(🖤 🩶 🤍 💜 🍰 )
-EMOJI_SPACE=(🚀 🪐 🛸 🌜 🛰️ 📡 💫 🔭 ☄️ )
 EMOJI_SONGKRAN=(🐘 🔫 🏵️ 🧡 🛵 💦 )
 EMOJI_EARTH=(🌍 🌎 🌏 )
 EMOJI_PENGUIN=(🐧 )
 EMOJI_EASTER=(🥚 🪺 ⛪ 🩷 🐝 🐇 🎗️ 🐣 🍫 🥕 🌼 🔔 🧺 )
 EMOJI_PRETZEL=(🥨 )
 EMOJI_JAZZ=(🎷 🪊 🎹 🥁 🎼 )
+EMOJI_SPACE=(🚀 🪐 🛸 🌜 🛰️ 📡 💫 🔭 ☄️ )
 EMOJI_MEXICO=(🌮 🇲🇽 💃 🥑 🪇 🌵 🌶️ 🪅 )
 EMOJI_VICTORY=(🎖️ 🪖 ✌️ )
 EMOJI_FOOTBALL=(⚽ )
@@ -101,10 +99,17 @@ EMOJI_TOILET=(🚽 🧻 💩 )
 EMOJI_THANKSGIVING=(🦃 🌰 🍗 🌽 🕯️ 🍄‍🟫 🙏 🍂 🥧 )
 EMOJI_MONKEY=(🐵 🙈 🙉 🙊 )
 EMOJI_BASKETBALL=(🏀 )
+EMOJI_DUDE=(🐸 )
 FAIL="💥"
 PI="π"
 
 # ✦ ─ Holiday checks ──────────────────────────────────────────────────────────────────────────────
+
+function is_pi_time() {
+  local time=$(date +%l%M)
+
+  (( time == 314 ))
+}
 
 function is_your_birthday() {
   (( CURRENT_DATE == BIRTHDAY ))
@@ -467,6 +472,12 @@ function is_basketball_day() {
   (( CURRENT_DATE == 1221 ))
 }
 
+function is_wednesday() {
+  local weekday=$(date +%u) # Monday → 1 <...> Sunday → 7
+
+  (( weekday == 3 ))
+}
+
 # ✦ ─ Randomizer ──────────────────────────────────────────────────────────────────────────────────
 
 random_from_array() {
@@ -479,7 +490,9 @@ random_from_array() {
 # ✦ ─ Pick the right set ──────────────────────────────────────────────────────────────────────────
 
 function get_emoji() {
-  if is_your_birthday; then
+  if is_pi_time || is_pi_day; then
+    echo -n "$PI"
+  elif is_your_birthday; then
     random_from_array EMOJI_CAKE
   elif is_xmas_season; then
     random_from_array EMOJI_XMAS
@@ -509,8 +522,6 @@ function get_emoji() {
     random_from_array EMOJI_FEMALE
   elif is_mario_day; then
     random_from_array EMOJI_MARIO
-  elif is_pi_day; then
-    echo -n "$PI"
   elif is_saint_patrick_day; then
     random_from_array EMOJI_ST_PATRICK
   elif is_vernal_equinox; then
@@ -585,6 +596,8 @@ function get_emoji() {
     random_from_array EMOJI_MONKEY
   elif is_basketball_day; then
     random_from_array EMOJI_BASKETBALL
+  elif is_wednesday; then
+    random_from_array EMOJI_DUDE
   else
     random_from_array EMOJI_DEFAULT
   fi
