@@ -18,7 +18,7 @@ RESET_C="%{$reset_color%}"
 # ⋆ January 27 → 127              │
 # ⋆ March 5 → 305                 │
 # ⋆ etc.                          │
-typeset -i BIRTHDAY=0000 # <-─────╯
+typeset -i BIRTHDAY=1012 # <-─────╯
 
 typeset -i CURRENT_YEAR=$(date +%Y)
 typeset -i CURRENT_DATE=10#$(date +%m%d)

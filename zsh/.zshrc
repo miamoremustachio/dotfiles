@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="nuska"
+ZSH_THEME="waiwai"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -63,14 +63,25 @@ zstyle ':omz:update' frequency 30
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+ZSH_CUSTOM="$HOME/.dotfiles/zsh/.oh-my-zsh/custom"
 
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+# 
+# Links to plugins repositories:
+# * zsh-autosuggestions
+# https://github.com/zsh-users/zsh-autosuggestions
+plugins=(
+  git
+  zsh-autosuggestions
+)
+
+# Plugins configuration
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 source $ZSH/oh-my-zsh.sh
 
@@ -104,3 +115,13 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ls="ls --color=tty --group-directories-first"
 alias lsa="ls -a"
+alias c="clear"
+alias cl="clear"
+alias df="df -h"
+
+# Enable zsh-syntax-highlighting plugin
+# (from https://github.com/zsh-users/zsh-syntax-highlighting)
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Edit syntax highlight style
+ZSH_HIGHLIGHT_STYLES[path]='none'

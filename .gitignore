@@ -15,3 +15,6 @@
 **/qBittorrent/*data*
 
 **/vlc/vlc-qt-interface.conf
+
+**/zsh/.oh-my-zsh/custom/plugins/*
+!**/zsh/.oh-my-zsh/custom/plugins/example
