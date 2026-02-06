@@ -72,10 +72,14 @@ ZSH_CUSTOM="$HOME/.dotfiles/zsh/.oh-my-zsh/custom"
 # Add wisely, as too many plugins slow down shell startup.
 # 
 # Links to plugins repositories:
+# * linus-rants
+# https://github.com/bhayward93/Linus-rants-ZSH
 # * zsh-autosuggestions
 # https://github.com/zsh-users/zsh-autosuggestions
 plugins=(
+  colored-man-pages
   git
+  # linus-rants
   zsh-autosuggestions
 )
 
@@ -118,6 +122,10 @@ alias lsa="ls -a"
 alias c="clear"
 alias cl="clear"
 alias df="df -h"
+
+# Enable zsh-allclear plugin
+# (from https://github.com/givensuman/zsh-allclear)
+source $HOME/.dotfiles/zsh/.oh-my-zsh/custom/plugins/zsh-allclear/zsh-allclear.plugin.zsh
 
 # Enable zsh-syntax-highlighting plugin
 # (from https://github.com/zsh-users/zsh-syntax-highlighting)
