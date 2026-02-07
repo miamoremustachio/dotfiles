@@ -1,7 +1,11 @@
 **/*_lock*
 **/*.lock*
+**/*logs
+**/*Logs
 
 **/bash/*history
+
+**/FreeFileSync/GlobalSettings.xml
 
 **/Code/User/*
 !**/Code/User/snippets

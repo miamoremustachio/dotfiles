@@ -61,7 +61,7 @@
             "`":         ShowHelp,
             "u":         Update,
             "<C-u>":     Rescan,
-            "<A-Enter>": ShowCurrentSongInfo,
+            "<A-'>":     ShowCurrentSongInfo,
             "<C-o>":     ShowOutputs,
             "<C-p>":     ShowDecoders,
 
@@ -80,6 +80,7 @@
             "ё":         ShowHelp,
             "г":         Update,
             "<C-г>":     Rescan,
+            "<A-э>":     ShowCurrentSongInfo,
             "<C-щ>":     ShowOutputs,
             "<C-з>":     ShowDecoders,
         },
@@ -117,7 +118,7 @@
             "<C-c>":       Close,
             "<Esc>":       Close,
             "<Del>":       Delete,
-            "<C-Enter>":   ShowInfo,
+            "<A-CR>":      ShowInfo,
             "<\\>":        ContextMenu(),
             "<C-s>":       Save(kind: Modal(all: true, duplicates_strategy: NonDuplicate)),
 
